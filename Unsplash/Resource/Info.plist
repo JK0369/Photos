@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UnsplashAccessKey</key>
+	<string>zDisvQc9s_PJLm3sRvRHsw6A6WqPuqncs1PCOT11lnE</string>
+	<key>UnsplashSecretKey</key>
+	<string>-KDY7UzlSqW2pfQCjLyeXrONrHYA2Cd2AmgAR_JYxlk</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -15,8 +19,6 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
 				</dict>
 			</array>
 		</dict>
