@@ -9,10 +9,21 @@ import UIKit
 
 class AppTapBarController: BaseTabBarController {
 
-    init(viewControllers: [UIViewController]) {
-        super.init(nibName: nil, bundle: nil)
+    static func create(with viewControllers: [UIViewController]) -> AppTapBarController {
+        let appTapBarController = AppTapBarController()
+        appTapBarController.setNavigationControllers(with: viewControllers)
 
-        setNavigationControllers(with: viewControllers)
+        return appTapBarController
+    }
+
+    override func configure() {
+        super.configure()
+
+        setupTabBarColor()
+    }
+
+    private func setupTabBarColor() {
+        tabBar.barTintColor = .black
     }
 
     private func setNavigationControllers(with viewControllers: [UIViewController]) {

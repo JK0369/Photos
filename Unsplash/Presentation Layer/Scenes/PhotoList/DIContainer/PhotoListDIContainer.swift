@@ -11,8 +11,7 @@ import UIKit
 class PhotoListDIContainer {
 
     struct Dependencies {
-        // TODO: network dependency
-        // TODO: disk cache
+        let provider: Provider
     }
 
     private let dependencies: Dependencies
@@ -21,28 +20,35 @@ class PhotoListDIContainer {
         self.dependencies = dependencies
     }
 
-    func makePhotoCoordinator() -> PhotoListCoordinator {
-        return PhotoListCoordinator(dependencies: self)
+    func makePhotoListViewController() -> UIViewController {
+        let photoListViewController = PhotoListViewController.create(with: makePhotoListViewModel())
+        return photoListViewController
+    }
+
+    func makePhotoCoordinator(navigationController: UINavigationController) -> PhotoListCoordinator {
+        return PhotoListCoordinator(navigationConroller: navigationController, dependencies: self)
     }
 
     // Private
 
     private func makePhotoListRepository() -> PhotoListRepository {
-        return PhotoListRepositoryImpl()
+        return PhotoListRepositoryImpl(provider: dependencies.provider)
     }
 
-    private func makePhotoListUseCase() -> PhotoUseCase {
-        return PhotoListUseCase(photoListRepository: makePhotoListRepository())
+    private func makePhotoListUseCase() -> PhotoListUseCase {
+        return PhotoListUseCaseImpl(photoListRepository: makePhotoListRepository())
     }
 
-    private func makePhotoListViewModel() -> PhotoViewModel {
-        return PhotoViewModelImpl(photoListUseCase: makePhotoListUseCase())
+    private func makePhotoListViewModel() -> PhotoListViewModel {
+        return PhotoListViewModelImpl(photoListUseCase: makePhotoListUseCase())
     }
 
 }
 
 extension PhotoListDIContainer: PhotoListCoordinatorDependencies {
-    func makePhotoListViewController() -> UIViewController {
-        return PhotoListViewController.create(with: makePhotoListViewModel())
+    func makePhotoDetailViewController(photos: [Photo]) -> UIViewController {
+        // TODO:
+
+        return UIViewController()
     }
 }

@@ -7,65 +7,92 @@
 
 import UIKit
 
-class PhotoListViewController: BaseViewController {
-    static func create(with viewModel: PhotoListViewModel) -> PhotoListViewController {
-        let photoListViewController = PhotoListViewController()
-        photoListViewController.viewModel = viewModel
+class PhotoListViewController: UIViewController {
 
-        return photoListViewController
+    static func create(with viewModel: PhotoListViewModel) -> PhotoListViewController {
+        let viewController = PhotoListViewController()
+        viewController.viewModel = viewModel
+
+        return viewController
     }
+
+    private lazy var tableView: UITableView = {
+        let view = UITableView()
+        view.prefetchDataSource = self
+        view.delegate = self
+        view.layoutMargins = .zero
+        view.separatorColor = .black
+        view.backgroundColor = .black.withAlphaComponent(0.3)
+        view.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.identifier)
+
+        return view
+    }()
 
     private var viewModel: PhotoListViewModel!
 
-    // UI
-
-    lazy var photoListTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(PhotoListTableViewCell.self, forCellReuseIdentifier: PhotoListTableViewCell.identifier)
-        tableView.dataSource = self
-        tableView.delegate = self
-
-        return tableView
-    }()
-
-    // View Life Cycles
+    var photos = [Photo]()
+    var provider: Provider? = ProviderImpl()
+    var currentPage = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.viewDidLoad()
+        setupViews()
+        addSubviews()
+        makeConstraints()
+        setupTableViewDiffableDataSource()
     }
-
-    // Private
 
     private func setupViews() {
-
+        view.backgroundColor = .black
+        title = "Unsplash"
+        tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "photo"), tag: 0)
     }
 
-    private func bindOutput() {
-
+    private func addSubviews() {
+        view.addSubview(tableView)
     }
 
-    private func updateitems() {
+    private func makeConstraints() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
 
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+    }
+
+    private func setupTableViewDiffableDataSource() {
+        viewModel.dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
+
+            self?.viewModel.loadImages(for: photo)
+            (cell as? PhotoTableViewCell)?.model = photo
+
+            return cell
+        })
+
+        viewModel.loadData()
     }
 }
 
-extension PhotoListViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.photos.value.count
+extension PhotoListViewController: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = scrollView.contentSize.height
+        let yOffset = scrollView.contentOffset.y
+        let heightRemainFromBottom = contentHeight - yOffset
+
+        let frameHeight = scrollView.frame.size.height
+        if heightRemainFromBottom < frameHeight {
+            viewModel.loadData()
+        }
     }
+}
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoListTableViewCell.identifier, for: indexPath) as? PhotoListTableViewCell else {
-            fatalError("Cannot dequeue reusable cell \(PhotoListTableViewCell.self) with reuseIdentifier: \(PhotoListTableViewCell.identifier)")
-        }
-        cell.model = viewModel.photos.value[indexPath.row]
-
-        if indexPath.row == viewModel.photos.value.count - 1 {
-            viewModel
-        }
-
-        return cell
+extension PhotoListViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { viewModel.prefetchImage(at: $0) }
     }
 }

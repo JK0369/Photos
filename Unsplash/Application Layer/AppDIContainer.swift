@@ -6,20 +6,29 @@
 //
 
 import Foundation
+import UIKit
 
 final class AppDIContainer {
 
     lazy var appConfiguration = AppConfiguration()
 
     // MARK: - Network
-    // TODO
+
+    lazy var provider: Provider = {
+        return ProviderImpl()
+    }()
 
     // MARK: - DIContainers of scenes
-    func makeMoviesSceneDIContainer() -> MoviesSceneDIContainer {
-        let dependencies = MoviesSceneDIContainer.Dependencies(apiDataTransferService: apiDataTransferService,
-                                                               imageDataTransferService: imageDataTransferService)
-        return MoviesSceneDIContainer(dependencies: dependencies)
+
+    func makeTabBarController(viewControllers: [UIViewController]) -> AppTapBarController {
+        let appTapBarController = AppTapBarController.create(with: viewControllers)
+
+        return appTapBarController
     }
 
-    func makePhotoListDIContainer() ->
+    func makePhotoListDIContainer() -> PhotoListDIContainer {
+        let dependencies = PhotoListDIContainer.Dependencies(provider: provider)
+
+        return PhotoListDIContainer(dependencies: dependencies)
+    }
 }

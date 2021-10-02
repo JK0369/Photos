@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PhotoListCoordinatorDependencies {
-    func makePhotoDetailViewController(selectedIndex: Int, photos: [Data]) -> UIViewController
+    func makePhotoDetailViewController(photos: [Photo]) -> UIViewController
 }
 
 class PhotoListCoordinator {
@@ -22,8 +22,8 @@ class PhotoListCoordinator {
 
     // Private
 
-    private func showPhotoDetail(selectedIndex: Int, photos: [Data]) {
-        let photoDetailViewController = dependencies.makePhotoDetailViewController(selectedIndex: selectedIndex, photos: photos)
+    private func showPhotoDetail(photos: [Photo]) {
+        let photoDetailViewController = dependencies.makePhotoDetailViewController(photos: photos)
         navigationConroller?.pushViewController(photoDetailViewController, animated: true)
     }
 }

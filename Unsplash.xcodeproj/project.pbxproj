@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */; };
+		E04C3E0F27087DE400393FD9 /* PhotoListRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */; };
+		E04C3E312708B43500393FD9 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E302708B43500393FD9 /* AppAppearance.swift */; };
+		E04C3E352708BCDD00393FD9 /* PhotoSearchDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E342708BCDD00393FD9 /* PhotoSearchDIContainer.swift */; };
+		E04C3E372708BCE300393FD9 /* PhotoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E362708BCE300393FD9 /* PhotoSearchViewController.swift */; };
+		E04C3E392708BCF400393FD9 /* PhotoSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E382708BCF400393FD9 /* PhotoSearchViewModel.swift */; };
+		E04C3E3B2708BCFB00393FD9 /* PhotoSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E3A2708BCFB00393FD9 /* PhotoSearchCoordinator.swift */; };
+		E04C3E3D2708BD0900393FD9 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */; };
+		E04C3E412708BD1B00393FD9 /* PhotoDetailDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E402708BD1B00393FD9 /* PhotoDetailDIContainer.swift */; };
+		E04C3E432708BD2000393FD9 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */; };
 		E06BB95527047F5700F2DFE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95427047F5700F2DFE6 /* AppDelegate.swift */; };
 		E06BB95727047F5700F2DFE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */; };
 		E06BB95E27047F5800F2DFE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E06BB95D27047F5800F2DFE6 /* Assets.xcassets */; };
@@ -21,15 +31,37 @@
 		E06BB98E27048BB100F2DFE6 /* PhotoListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB98D27048BB100F2DFE6 /* PhotoListCoordinator.swift */; };
 		E06BB99027048BB800F2DFE6 /* PhotoListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB98F27048BB800F2DFE6 /* PhotoListDIContainer.swift */; };
 		E06BB99727048DAE00F2DFE6 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB99627048DAE00F2DFE6 /* Observable.swift */; };
-		E06BB99C27048F4E00F2DFE6 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB99B27048F4E00F2DFE6 /* Photo.swift */; };
-		E06BB99E2704915700F2DFE6 /* PhotoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB99D2704915700F2DFE6 /* PhotoListUseCase.swift */; };
 		E06BB9A02704960F00F2DFE6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB99F2704960F00F2DFE6 /* BaseViewController.swift */; };
 		E06BB9A227049C1700F2DFE6 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB9A127049C1700F2DFE6 /* BaseTableViewCell.swift */; };
 		E06BB9A427049CB400F2DFE6 /* PhotoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB9A327049CB400F2DFE6 /* PhotoListTableViewCell.swift */; };
 		E06BB9A727049FCA00F2DFE6 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB9A627049FCA00F2DFE6 /* NSObject.swift */; };
+		E07FA60727084EF4004B7E3D /* URLSessionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA5FF27084EF4004B7E3D /* URLSessionable.swift */; };
+		E07FA60827084EF4004B7E3D /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA60027084EF4004B7E3D /* Provider.swift */; };
+		E07FA60927084EF4004B7E3D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA60227084EF4004B7E3D /* NetworkError.swift */; };
+		E07FA60A27084EF4004B7E3D /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA60427084EF4004B7E3D /* Requestable.swift */; };
+		E07FA60B27084EF4004B7E3D /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA60527084EF4004B7E3D /* Endpoint.swift */; };
+		E07FA60C27084EF4004B7E3D /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA60627084EF4004B7E3D /* Responsable.swift */; };
+		E07FA60E27084F4A004B7E3D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA60D27084F49004B7E3D /* ImageCache.swift */; };
+		E07FA61927084F7C004B7E3D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61127084F7C004B7E3D /* Photo.swift */; };
+		E07FA61A27084F7C004B7E3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61327084F7C004B7E3D /* Constants.swift */; };
+		E07FA61B27084F7C004B7E3D /* NetworkResponseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61427084F7C004B7E3D /* NetworkResponseMock.swift */; };
+		E07FA61C27084F7C004B7E3D /* PhotoListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61727084F7C004B7E3D /* PhotoListRequestDTO.swift */; };
+		E07FA61D27084F7C004B7E3D /* PhotoListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61827084F7C004B7E3D /* PhotoListResponseDTO.swift */; };
+		E07FA6202708501A004B7E3D /* PhotoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61F2708501A004B7E3D /* PhotoListUseCase.swift */; };
+		E07FA62527085125004B7E3D /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA62427085125004B7E3D /* APIEndpoints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepository.swift; sourceTree = "<group>"; };
+		E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepositoryImpl.swift; sourceTree = "<group>"; };
+		E04C3E302708B43500393FD9 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
+		E04C3E342708BCDD00393FD9 /* PhotoSearchDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchDIContainer.swift; sourceTree = "<group>"; };
+		E04C3E362708BCE300393FD9 /* PhotoSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchViewController.swift; sourceTree = "<group>"; };
+		E04C3E382708BCF400393FD9 /* PhotoSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchViewModel.swift; sourceTree = "<group>"; };
+		E04C3E3A2708BCFB00393FD9 /* PhotoSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchCoordinator.swift; sourceTree = "<group>"; };
+		E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		E04C3E402708BD1B00393FD9 /* PhotoDetailDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailDIContainer.swift; sourceTree = "<group>"; };
+		E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
 		E06BB95127047F5700F2DFE6 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E06BB95427047F5700F2DFE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,12 +78,24 @@
 		E06BB98D27048BB100F2DFE6 /* PhotoListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListCoordinator.swift; sourceTree = "<group>"; };
 		E06BB98F27048BB800F2DFE6 /* PhotoListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListDIContainer.swift; sourceTree = "<group>"; };
 		E06BB99627048DAE00F2DFE6 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		E06BB99B27048F4E00F2DFE6 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		E06BB99D2704915700F2DFE6 /* PhotoListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListUseCase.swift; sourceTree = "<group>"; };
 		E06BB99F2704960F00F2DFE6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E06BB9A127049C1700F2DFE6 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		E06BB9A327049CB400F2DFE6 /* PhotoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListTableViewCell.swift; sourceTree = "<group>"; };
 		E06BB9A627049FCA00F2DFE6 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
+		E07FA5FF27084EF4004B7E3D /* URLSessionable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionable.swift; sourceTree = "<group>"; };
+		E07FA60027084EF4004B7E3D /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		E07FA60227084EF4004B7E3D /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		E07FA60427084EF4004B7E3D /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		E07FA60527084EF4004B7E3D /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		E07FA60627084EF4004B7E3D /* Responsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
+		E07FA60D27084F49004B7E3D /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		E07FA61127084F7C004B7E3D /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		E07FA61327084F7C004B7E3D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E07FA61427084F7C004B7E3D /* NetworkResponseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseMock.swift; sourceTree = "<group>"; };
+		E07FA61727084F7C004B7E3D /* PhotoListRequestDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListRequestDTO.swift; sourceTree = "<group>"; };
+		E07FA61827084F7C004B7E3D /* PhotoListResponseDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListResponseDTO.swift; sourceTree = "<group>"; };
+		E07FA61F2708501A004B7E3D /* PhotoListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListUseCase.swift; sourceTree = "<group>"; };
+		E07FA62427085125004B7E3D /* APIEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +109,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E04C3E0927087D3400393FD9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				E04C3E0A27087D4100393FD9 /* Repository */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		E04C3E0A27087D4100393FD9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		E04C3E0D27087DD700393FD9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		E06BB94827047F5700F2DFE6 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +154,8 @@
 			children = (
 				E06BB9682704809E00F2DFE6 /* Application Layer */,
 				E06BB96A2704812700F2DFE6 /* Presentation Layer */,
-				E06BB9692704812000F2DFE6 /* Domain Layer */,
+				E07FA60F27084F7C004B7E3D /* Domain Layer */,
+				E07FA621270850D0004B7E3D /* Data Layer */,
 				E06BB97D270482A200F2DFE6 /* Infrastructure */,
 				E06BB99527048D9400F2DFE6 /* Utilities */,
 				E06BB96B2704816700F2DFE6 /* Resource */,
@@ -99,22 +168,13 @@
 			children = (
 				E06BB95427047F5700F2DFE6 /* AppDelegate.swift */,
 				E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */,
+				E04C3E302708B43500393FD9 /* AppAppearance.swift */,
 				E06BB9822704856400F2DFE6 /* AppConfigurations.swift */,
 				E06BB9802704852C00F2DFE6 /* AppDIContainer.swift */,
 				E06BB97E270484D700F2DFE6 /* AppCoordinator.swift */,
 				E06BB9842704879F00F2DFE6 /* AppTapBarController.swift */,
 			);
 			path = "Application Layer";
-			sourceTree = "<group>";
-		};
-		E06BB9692704812000F2DFE6 /* Domain Layer */ = {
-			isa = PBXGroup;
-			children = (
-				E06BB99927048F3F00F2DFE6 /* Entities */,
-				E06BB99A27048F4300F2DFE6 /* UseCases */,
-				E06BB99827048F2300F2DFE6 /* Interfaces */,
-			);
-			path = "Domain Layer";
 			sourceTree = "<group>";
 		};
 		E06BB96A2704812700F2DFE6 /* Presentation Layer */ = {
@@ -140,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				E06BB970270481D600F2DFE6 /* PhotoList */,
-				E06BB971270481EB00F2DFE6 /* SearchPhoto */,
+				E06BB971270481EB00F2DFE6 /* PhotoSearch */,
 				E06BB9722704820100F2DFE6 /* PhotoDetail */,
 			);
 			path = Scenes;
@@ -151,7 +211,6 @@
 			children = (
 				E06BB9A527049FBF00F2DFE6 /* Extensions */,
 				E06BB9862704899E00F2DFE6 /* Bases */,
-				E06BB99427048BED00F2DFE6 /* Customs */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -167,7 +226,7 @@
 			path = PhotoList;
 			sourceTree = "<group>";
 		};
-		E06BB971270481EB00F2DFE6 /* SearchPhoto */ = {
+		E06BB971270481EB00F2DFE6 /* PhotoSearch */ = {
 			isa = PBXGroup;
 			children = (
 				E06BB99227048BD000F2DFE6 /* DIContainer */,
@@ -175,7 +234,7 @@
 				E06BB97B2704825100F2DFE6 /* ViewModel */,
 				E06BB97A2704824D00F2DFE6 /* Coordinator */,
 			);
-			path = SearchPhoto;
+			path = PhotoSearch;
 			sourceTree = "<group>";
 		};
 		E06BB9722704820100F2DFE6 /* PhotoDetail */ = {
@@ -184,21 +243,14 @@
 				E06BB99327048BD500F2DFE6 /* DIContainer */,
 				E06BB9752704822500F2DFE6 /* View */,
 				E06BB9742704822000F2DFE6 /* ViewModel */,
-				E06BB9732704820800F2DFE6 /* Coordinator */,
 			);
 			path = PhotoDetail;
-			sourceTree = "<group>";
-		};
-		E06BB9732704820800F2DFE6 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		E06BB9742704822000F2DFE6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -206,6 +258,7 @@
 		E06BB9752704822500F2DFE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,6 +291,7 @@
 		E06BB97A2704824D00F2DFE6 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E3A2708BCFB00393FD9 /* PhotoSearchCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -245,6 +299,7 @@
 		E06BB97B2704825100F2DFE6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E382708BCF400393FD9 /* PhotoSearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -252,6 +307,7 @@
 		E06BB97C2704825500F2DFE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E362708BCE300393FD9 /* PhotoSearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,6 +315,7 @@
 		E06BB97D270482A200F2DFE6 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				E07FA5FD27084EF4004B7E3D /* Network */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -284,6 +341,7 @@
 		E06BB99227048BD000F2DFE6 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E342708BCDD00393FD9 /* PhotoSearchDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -291,46 +349,18 @@
 		E06BB99327048BD500F2DFE6 /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
+				E04C3E402708BD1B00393FD9 /* PhotoDetailDIContainer.swift */,
 			);
 			path = DIContainer;
-			sourceTree = "<group>";
-		};
-		E06BB99427048BED00F2DFE6 /* Customs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Customs;
 			sourceTree = "<group>";
 		};
 		E06BB99527048D9400F2DFE6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E07FA60D27084F49004B7E3D /* ImageCache.swift */,
 				E06BB99627048DAE00F2DFE6 /* Observable.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		E06BB99827048F2300F2DFE6 /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		E06BB99927048F3F00F2DFE6 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				E06BB99B27048F4E00F2DFE6 /* Photo.swift */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		E06BB99A27048F4300F2DFE6 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				E06BB99D2704915700F2DFE6 /* PhotoListUseCase.swift */,
-			);
-			path = UseCases;
 			sourceTree = "<group>";
 		};
 		E06BB9A527049FBF00F2DFE6 /* Extensions */ = {
@@ -339,6 +369,106 @@
 				E06BB9A627049FCA00F2DFE6 /* NSObject.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E07FA5FD27084EF4004B7E3D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA5FE27084EF4004B7E3D /* Provider */,
+				E07FA60127084EF4004B7E3D /* Common */,
+				E07FA60327084EF4004B7E3D /* Endpoint */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E07FA5FE27084EF4004B7E3D /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA5FF27084EF4004B7E3D /* URLSessionable.swift */,
+				E07FA60027084EF4004B7E3D /* Provider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		E07FA60127084EF4004B7E3D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA60227084EF4004B7E3D /* NetworkError.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E07FA60327084EF4004B7E3D /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA60427084EF4004B7E3D /* Requestable.swift */,
+				E07FA60527084EF4004B7E3D /* Endpoint.swift */,
+				E07FA60627084EF4004B7E3D /* Responsable.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		E07FA60F27084F7C004B7E3D /* Domain Layer */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA62327085125004B7E3D /* Network */,
+				E07FA61E2708500B004B7E3D /* UseCase */,
+				E07FA61027084F7C004B7E3D /* Entity */,
+				E04C3E0927087D3400393FD9 /* Interface */,
+			);
+			path = "Domain Layer";
+			sourceTree = "<group>";
+		};
+		E07FA61027084F7C004B7E3D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA61127084F7C004B7E3D /* Photo.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		E07FA61227084F7C004B7E3D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA61327084F7C004B7E3D /* Constants.swift */,
+				E07FA61427084F7C004B7E3D /* NetworkResponseMock.swift */,
+				E07FA61527084F7C004B7E3D /* PhotoList */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E07FA61527084F7C004B7E3D /* PhotoList */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA61727084F7C004B7E3D /* PhotoListRequestDTO.swift */,
+				E07FA61827084F7C004B7E3D /* PhotoListResponseDTO.swift */,
+			);
+			path = PhotoList;
+			sourceTree = "<group>";
+		};
+		E07FA61E2708500B004B7E3D /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA61F2708501A004B7E3D /* PhotoListUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		E07FA621270850D0004B7E3D /* Data Layer */ = {
+			isa = PBXGroup;
+			children = (
+				E04C3E0D27087DD700393FD9 /* Repository */,
+				E07FA61227084F7C004B7E3D /* Network */,
+			);
+			path = "Data Layer";
+			sourceTree = "<group>";
+		};
+		E07FA62327085125004B7E3D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E07FA62427085125004B7E3D /* APIEndpoints.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,24 +541,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */,
 				E06BB9A227049C1700F2DFE6 /* BaseTableViewCell.swift in Sources */,
 				E06BB988270489A800F2DFE6 /* BaseTabBarController.swift in Sources */,
+				E04C3E312708B43500393FD9 /* AppAppearance.swift in Sources */,
+				E07FA60C27084EF4004B7E3D /* Responsable.swift in Sources */,
 				E06BB9812704852C00F2DFE6 /* AppDIContainer.swift in Sources */,
 				E06BB9A727049FCA00F2DFE6 /* NSObject.swift in Sources */,
 				E06BB97F270484D700F2DFE6 /* AppCoordinator.swift in Sources */,
+				E07FA61927084F7C004B7E3D /* Photo.swift in Sources */,
+				E07FA61B27084F7C004B7E3D /* NetworkResponseMock.swift in Sources */,
+				E07FA61C27084F7C004B7E3D /* PhotoListRequestDTO.swift in Sources */,
 				E06BB9852704879F00F2DFE6 /* AppTapBarController.swift in Sources */,
 				E06BB99727048DAE00F2DFE6 /* Observable.swift in Sources */,
+				E04C3E392708BCF400393FD9 /* PhotoSearchViewModel.swift in Sources */,
 				E06BB9A02704960F00F2DFE6 /* BaseViewController.swift in Sources */,
+				E07FA60827084EF4004B7E3D /* Provider.swift in Sources */,
+				E07FA60E27084F4A004B7E3D /* ImageCache.swift in Sources */,
+				E07FA60A27084EF4004B7E3D /* Requestable.swift in Sources */,
+				E04C3E0F27087DE400393FD9 /* PhotoListRepositoryImpl.swift in Sources */,
+				E07FA62527085125004B7E3D /* APIEndpoints.swift in Sources */,
+				E04C3E432708BD2000393FD9 /* PhotoDetailViewModel.swift in Sources */,
+				E04C3E3D2708BD0900393FD9 /* PhotoDetailViewController.swift in Sources */,
+				E04C3E3B2708BCFB00393FD9 /* PhotoSearchCoordinator.swift in Sources */,
 				E06BB98C27048BA900F2DFE6 /* PhotoListViewModel.swift in Sources */,
-				E06BB99E2704915700F2DFE6 /* PhotoListUseCase.swift in Sources */,
-				E06BB99C27048F4E00F2DFE6 /* Photo.swift in Sources */,
+				E07FA60727084EF4004B7E3D /* URLSessionable.swift in Sources */,
 				E06BB95527047F5700F2DFE6 /* AppDelegate.swift in Sources */,
 				E06BB99027048BB800F2DFE6 /* PhotoListDIContainer.swift in Sources */,
+				E07FA60927084EF4004B7E3D /* NetworkError.swift in Sources */,
+				E04C3E412708BD1B00393FD9 /* PhotoDetailDIContainer.swift in Sources */,
+				E07FA60B27084EF4004B7E3D /* Endpoint.swift in Sources */,
+				E04C3E372708BCE300393FD9 /* PhotoSearchViewController.swift in Sources */,
 				E06BB98A27048BA200F2DFE6 /* PhotoListViewController.swift in Sources */,
 				E06BB9A427049CB400F2DFE6 /* PhotoListTableViewCell.swift in Sources */,
 				E06BB9832704856400F2DFE6 /* AppConfigurations.swift in Sources */,
 				E06BB95727047F5700F2DFE6 /* SceneDelegate.swift in Sources */,
 				E06BB98E27048BB100F2DFE6 /* PhotoListCoordinator.swift in Sources */,
+				E04C3E352708BCDD00393FD9 /* PhotoSearchDIContainer.swift in Sources */,
+				E07FA61A27084F7C004B7E3D /* Constants.swift in Sources */,
+				E07FA6202708501A004B7E3D /* PhotoListUseCase.swift in Sources */,
+				E07FA61D27084F7C004B7E3D /* PhotoListResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,7 +726,7 @@
 				INFOPLIST_FILE = Unsplash/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,7 +754,7 @@
 				INFOPLIST_FILE = Unsplash/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

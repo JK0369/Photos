@@ -7,50 +7,94 @@
 
 import Foundation
 
-struct PhotoListViewModelActions {
-    let didTapPhoto: (selectedIndex: Int, photos: [Data])
+import UIKit
+
+struct PhotoListViewModelAction {
+    let showPhotoDetail: (Photo) -> Void
 }
 
-protocol PhotoListViewModelInput {
-    func viewDidLoad()
-    func didSelectRow(at index: Int)
-    func didLoadNextPage()
+enum Section: Int, CaseIterable {
+    case main
+}
+
+protocol PhotoListViewModelInout {
+    var dataSource: UITableViewDiffableDataSource<Section, Photo>! { get set }
+
+    func loadData()
+    func loadImages(for photo: Photo)
+    func prefetchImage(at indexPath: IndexPath)
 }
 
 protocol PhotoListViewModelOutput {
-    var photos: Observable<[Photo]> { get }
 }
 
-protocol PhotoListViewModel: PhotoListViewModelInput, PhotoListViewModelOutput {}
+protocol PhotoListViewModel: PhotoListViewModelInout, PhotoListViewModelOutput {}
 
 class PhotoListViewModelImpl: PhotoListViewModel {
-    private let photoListUseCase: PhotoListUseCase
 
-    // TODO: 4개 변수 확실히 알기
-    private var currentPage: Int = 0
-    private var totalPageCount: Int = 1
-    private var hasMorePage: Bool { currentPage < totalPageCount }
-    private var nextPage: Int { hasMorePage ? currentPage + 1 : currentPage }
+    private let photoListUseCase: PhotoListUseCase
 
     init(photoListUseCase: PhotoListUseCase) {
         self.photoListUseCase = photoListUseCase
     }
 
-    // Output
+    var currentPage: Int = 0
+    var dataSource: UITableViewDiffableDataSource<Section, Photo>!
+    lazy var provider: Provider = ProviderImpl()
+    lazy var imageCache = ImageCache(provider: provider)
 
-    var photos: Observable<[Photo]> = .init([])
+    // Load data
 
-    // Input
+    func loadData() {
+        currentPage += 1
 
-    func viewDidLoad() {
-        // TODO: usecase
+        photoListUseCase.execute(requestVal: PhotoListRequestValue(page: currentPage)) { [weak self] result in
+            guard let weakSelf = self else { return }
+
+            switch result {
+            case .success(let newPhotos):
+                var snapshot = weakSelf.dataSource.snapshot()
+                if snapshot.sectionIdentifiers.isEmpty {
+                    snapshot.appendSections([.main])
+                }
+                snapshot.appendItems(newPhotos)
+                DispatchQueue.global(qos: .background).async {
+                    weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
+                }
+
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
-    func didLoadNextPage() {
-        <#code#>
+    // prefetch
+
+    func prefetchImage(at indexPath: IndexPath) {
+        guard let photo = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+
+        imageCache.prefetchImage(for: photo)
     }
 
-    func didSelectRow(at index: Int) {
-        // TODO:
+    // load image
+
+    func loadImages(for photo: Photo) {
+
+        imageCache.loadImage(for: photo) { [weak self] item, image in
+            guard let `self` = self else { return }
+            guard let photo = item as? Photo else { return }
+            guard let image = image, image != photo.image else { return }
+
+            photo.image = image
+            var snapshot = `self`.dataSource.snapshot()
+            guard snapshot.indexOfItem(photo) != nil else { return }
+
+            snapshot.reloadItems([photo])
+            DispatchQueue.global(qos: .background).async {
+                `self`.dataSource.apply(snapshot, animatingDifferences: false)
+            }
+        }
     }
 }
