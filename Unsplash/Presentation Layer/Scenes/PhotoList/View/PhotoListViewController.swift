@@ -43,9 +43,15 @@ class PhotoListViewController: UIViewController {
         setupTableViewDiffableDataSource()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
+
     private func setupViews() {
-        view.backgroundColor = .black
         title = "Unsplash"
+        view.backgroundColor = .black
         tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "photo"), tag: 0)
     }
 
@@ -90,7 +96,7 @@ extension PhotoListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        viewModel.didSelectRow(at: indexPath)
     }
 }
 

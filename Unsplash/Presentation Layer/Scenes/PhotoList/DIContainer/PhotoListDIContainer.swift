@@ -20,8 +20,8 @@ class PhotoListDIContainer {
         self.dependencies = dependencies
     }
 
-    func makePhotoListViewController() -> UIViewController {
-        let photoListViewController = PhotoListViewController.create(with: makePhotoListViewModel())
+    func makePhotoListViewController(actions: PhotoListViewModelActions) -> UIViewController {
+        let photoListViewController = PhotoListViewController.create(with: makePhotoListViewModel(actions: actions))
         return photoListViewController
     }
 
@@ -39,16 +39,14 @@ class PhotoListDIContainer {
         return PhotoListUseCaseImpl(photoListRepository: makePhotoListRepository())
     }
 
-    private func makePhotoListViewModel() -> PhotoListViewModel {
-        return PhotoListViewModelImpl(photoListUseCase: makePhotoListUseCase())
+    private func makePhotoListViewModel(actions: PhotoListViewModelActions) -> PhotoListViewModel {
+        return PhotoListViewModelImpl(photoListUseCase: makePhotoListUseCase(), actions: actions)
     }
 
 }
 
 extension PhotoListDIContainer: PhotoListCoordinatorDependencies {
-    func makePhotoDetailViewController(photos: [Photo]) -> UIViewController {
-        // TODO:
-
-        return UIViewController()
+    func makePhotoDetailViewController(photos: [Photo], selectedIndexPath: IndexPath) -> UIViewController {
+        return PhotoDetailViewController.create(with: PhotoDetailViewModelImpl(photos: photos, selectedIndexPath: selectedIndexPath))
     }
 }

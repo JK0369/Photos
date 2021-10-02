@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-// 주의: Anyclass의 서브클래스만 가능
 class Photo: Item {
     var image: UIImage
     var imageUrl: URL

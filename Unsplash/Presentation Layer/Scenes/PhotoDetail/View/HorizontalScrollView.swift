@@ -7,12 +7,15 @@
 
 import UIKit
 
-class HorizontalScrollView: BaseScrollView<[Photo]> {
+class HorizontalScrollView: BaseScrollView<HorizontalScrollViewModel> {
 
-    let horizontalWidth: CGFloat
+    private let horizontalWidth: CGFloat
+    private let horizontalHeight: CGFloat
+    private var imageViews = [UIImageView]()
 
-    init(horizontalWidth: CGFloat) {
+    init(horizontalWidth: CGFloat, horizontalHeight: CGFloat) {
         self.horizontalWidth = horizontalWidth
+        self.horizontalHeight = horizontalHeight
         super.init(frame: .zero)
 
         configure()
@@ -25,7 +28,7 @@ class HorizontalScrollView: BaseScrollView<[Photo]> {
         showsHorizontalScrollIndicator = false
     }
 
-    override func bind(_ model: [Photo]) {
+    override func bind(_ model: HorizontalScrollViewModel) {
         super.bind(model)
 
         setImages()
@@ -33,20 +36,29 @@ class HorizontalScrollView: BaseScrollView<[Photo]> {
     }
 
     private func setImages() {
-        guard let photos = model else { return }
-        photos
+        guard let horizontalScrollViewModel = model else { return }
+        horizontalScrollViewModel.images
             .enumerated()
             .forEach {
-                let imageView = UIImageView(image: $0.element.image)
-                imageView.contentMode = .scaleToFill
+                let imageView = UIImageView(image: $0.element)
+                imageView.contentMode = .scaleAspectFit
                 let xOffset = horizontalWidth * CGFloat($0.offset)
-                imageView.frame.origin = CGPoint(x: xOffset, y: 0)
-                imageView.frame.size = $0.element.image.size
-                addSubview(imageView)
+
+                imageView.frame = CGRect(x: xOffset, y: 0, width: horizontalWidth, height: horizontalHeight)
+                self.imageViews.append(imageView)
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.addSubview(imageView)
+                }
             }
+
+        DispatchQueue.main.async { [weak self] in
+            guard let targetImageview = self?.imageViews[horizontalScrollViewModel.selectedIndex] else { return }
+            self?.scrollToView(view: targetImageview, scrollDirection: .horizontal)
+        }
     }
 
     private func updateScrollViewContentWidth() {
-        contentSize.width = horizontalWidth * CGFloat(model?.count ?? 1)
+        contentSize.width = horizontalWidth * CGFloat(model?.images.count ?? 1)
     }
 }

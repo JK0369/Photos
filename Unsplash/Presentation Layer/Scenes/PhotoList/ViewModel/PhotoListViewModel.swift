@@ -9,8 +9,8 @@ import Foundation
 
 import UIKit
 
-struct PhotoListViewModelAction {
-    let showPhotoDetail: ([Photo]) -> Void
+struct PhotoListViewModelActions {
+    let showPhotoDetail: (_ photos: [Photo], _ selectedIndexPath: IndexPath) -> Void
 }
 
 enum Section: Int, CaseIterable {
@@ -24,6 +24,7 @@ protocol PhotoListViewModelInout {
     func scrollViewDidScroll()
     func didUpdateCell(for photo: Photo)
     func prefetchRow(at indexPath: IndexPath)
+    func didSelectRow(at indexPath: IndexPath)
 }
 
 protocol PhotoListViewModelOutput {
@@ -34,9 +35,11 @@ protocol PhotoListViewModel: PhotoListViewModelInout, PhotoListViewModelOutput {
 class PhotoListViewModelImpl: PhotoListViewModel {
 
     private let photoListUseCase: PhotoListUseCase
+    private let actions: PhotoListViewModelActions
 
-    init(photoListUseCase: PhotoListUseCase) {
+    init(photoListUseCase: PhotoListUseCase, actions: PhotoListViewModelActions) {
         self.photoListUseCase = photoListUseCase
+        self.actions = actions
     }
 
     var currentPage: Int = 0
@@ -60,6 +63,11 @@ class PhotoListViewModelImpl: PhotoListViewModel {
 
     func prefetchRow(at indexPath: IndexPath) {
         prefetchImage(at: indexPath)
+    }
+
+    func didSelectRow(at indexPath: IndexPath) {
+        let photos = dataSource.snapshot().itemIdentifiers
+        actions.showPhotoDetail(photos, indexPath)
     }
 
     // Private

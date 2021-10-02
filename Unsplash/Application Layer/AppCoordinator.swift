@@ -11,6 +11,7 @@ import UIKit
 class AppCoordinator {
     private let appDIContainer: AppDIContainer
     private let photoListDIContainer: PhotoListDIContainer
+    private var appTabBarController: UITabBarController?
 
     init(appDIContainer: AppDIContainer, photoListDIContainer: PhotoListDIContainer) {
         self.appDIContainer = appDIContainer
@@ -18,15 +19,15 @@ class AppCoordinator {
     }
 
     func start(with window: UIWindow) {
-        // TODO:
-//        let actions = PhotoListViewModelAction(showPhotoDetail: showPhotoDetail(photo:))
-        let viewControllers = [photoListDIContainer.makePhotoListViewController()]
+        let viewControllers = [photoListDIContainer.makePhotoListViewController(actions: PhotoListViewModelActions(showPhotoDetail: showPhotoDetail))]
         let tabBarController = appDIContainer.makeTabBarController(viewControllers: viewControllers)
+        appTabBarController = tabBarController
+
         window.rootViewController = tabBarController
     }
 
-    private func showPhotoDetail(photo: Photo) {
-        // TODO:
-//        let viewController = dependencies.
+    private func showPhotoDetail(photos: [Photo], selectedIndexPath: IndexPath) {
+        let viewController = photoListDIContainer.makePhotoDetailViewController(photos: photos, selectedIndexPath: selectedIndexPath)
+        (appTabBarController?.selectedViewController as? UINavigationController)?.pushViewController(viewController, animated: true)
     }
 }
