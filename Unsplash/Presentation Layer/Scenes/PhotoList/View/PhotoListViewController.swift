@@ -68,13 +68,12 @@ class PhotoListViewController: UIViewController {
         viewModel.dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
 
-            self?.viewModel.loadImages(for: photo)
+            self?.viewModel.didUpdateCell(for: photo)
             (cell as? PhotoTableViewCell)?.model = photo
 
             return cell
         })
-
-        viewModel.loadData()
+        viewModel.didSetupDiffableDataSource()
     }
 }
 
@@ -86,13 +85,17 @@ extension PhotoListViewController: UITableViewDelegate {
 
         let frameHeight = scrollView.frame.size.height
         if heightRemainFromBottom < frameHeight {
-            viewModel.loadData()
+            viewModel.scrollViewDidScroll()
         }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
     }
 }
 
 extension PhotoListViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach { viewModel.prefetchImage(at: $0) }
+        indexPaths.forEach { viewModel.prefetchRow(at: $0) }
     }
 }

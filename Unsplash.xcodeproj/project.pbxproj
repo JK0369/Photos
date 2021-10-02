@@ -17,6 +17,8 @@
 		E04C3E3D2708BD0900393FD9 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */; };
 		E04C3E412708BD1B00393FD9 /* PhotoDetailDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E402708BD1B00393FD9 /* PhotoDetailDIContainer.swift */; };
 		E04C3E432708BD2000393FD9 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */; };
+		E04C3E452708C13B00393FD9 /* BaseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E442708C13B00393FD9 /* BaseScrollView.swift */; };
+		E04C3E472708C17000393FD9 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */; };
 		E06BB95527047F5700F2DFE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95427047F5700F2DFE6 /* AppDelegate.swift */; };
 		E06BB95727047F5700F2DFE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */; };
 		E06BB95E27047F5800F2DFE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E06BB95D27047F5800F2DFE6 /* Assets.xcassets */; };
@@ -62,6 +64,8 @@
 		E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		E04C3E402708BD1B00393FD9 /* PhotoDetailDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailDIContainer.swift; sourceTree = "<group>"; };
 		E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
+		E04C3E442708C13B00393FD9 /* BaseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollView.swift; sourceTree = "<group>"; };
+		E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		E06BB95127047F5700F2DFE6 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E06BB95427047F5700F2DFE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,7 +213,6 @@
 		E06BB96F270481BC00F2DFE6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E06BB9A527049FBF00F2DFE6 /* Extensions */,
 				E06BB9862704899E00F2DFE6 /* Bases */,
 			);
 			path = Components;
@@ -259,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */,
+				E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,6 +330,7 @@
 				E06BB987270489A800F2DFE6 /* BaseTabBarController.swift */,
 				E06BB99F2704960F00F2DFE6 /* BaseViewController.swift */,
 				E06BB9A127049C1700F2DFE6 /* BaseTableViewCell.swift */,
+				E04C3E442708C13B00393FD9 /* BaseScrollView.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 			children = (
 				E07FA60D27084F49004B7E3D /* ImageCache.swift */,
 				E06BB99627048DAE00F2DFE6 /* Observable.swift */,
+				E06BB9A527049FBF00F2DFE6 /* Extensions */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -542,11 +548,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */,
+				E04C3E472708C17000393FD9 /* HorizontalScrollView.swift in Sources */,
 				E06BB9A227049C1700F2DFE6 /* BaseTableViewCell.swift in Sources */,
 				E06BB988270489A800F2DFE6 /* BaseTabBarController.swift in Sources */,
 				E04C3E312708B43500393FD9 /* AppAppearance.swift in Sources */,
 				E07FA60C27084EF4004B7E3D /* Responsable.swift in Sources */,
 				E06BB9812704852C00F2DFE6 /* AppDIContainer.swift in Sources */,
+				E04C3E452708C13B00393FD9 /* BaseScrollView.swift in Sources */,
 				E06BB9A727049FCA00F2DFE6 /* NSObject.swift in Sources */,
 				E06BB97F270484D700F2DFE6 /* AppCoordinator.swift in Sources */,
 				E07FA61927084F7C004B7E3D /* Photo.swift in Sources */,

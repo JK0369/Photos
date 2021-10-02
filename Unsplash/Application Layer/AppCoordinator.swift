@@ -18,7 +18,8 @@ class AppCoordinator {
     }
 
     func start(with window: UIWindow) {
-        let actions = PhotoListViewModelAction(showPhotoDetail: showPhotoDetail(photo:))
+        // TODO:
+//        let actions = PhotoListViewModelAction(showPhotoDetail: showPhotoDetail(photo:))
         let viewControllers = [photoListDIContainer.makePhotoListViewController()]
         let tabBarController = appDIContainer.makeTabBarController(viewControllers: viewControllers)
         window.rootViewController = tabBarController

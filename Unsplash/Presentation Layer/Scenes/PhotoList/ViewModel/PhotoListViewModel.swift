@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct PhotoListViewModelAction {
-    let showPhotoDetail: (Photo) -> Void
+    let showPhotoDetail: ([Photo]) -> Void
 }
 
 enum Section: Int, CaseIterable {
@@ -20,9 +20,10 @@ enum Section: Int, CaseIterable {
 protocol PhotoListViewModelInout {
     var dataSource: UITableViewDiffableDataSource<Section, Photo>! { get set }
 
-    func loadData()
-    func loadImages(for photo: Photo)
-    func prefetchImage(at indexPath: IndexPath)
+    func didSetupDiffableDataSource()
+    func scrollViewDidScroll()
+    func didUpdateCell(for photo: Photo)
+    func prefetchRow(at indexPath: IndexPath)
 }
 
 protocol PhotoListViewModelOutput {
@@ -43,9 +44,27 @@ class PhotoListViewModelImpl: PhotoListViewModel {
     lazy var provider: Provider = ProviderImpl()
     lazy var imageCache = ImageCache(provider: provider)
 
-    // Load data
+    // Input
 
-    func loadData() {
+    func didSetupDiffableDataSource() {
+        loadData()
+    }
+
+    func scrollViewDidScroll() {
+        loadData()
+    }
+
+    func didUpdateCell(for photo: Photo) {
+        loadImages(for: photo)
+    }
+
+    func prefetchRow(at indexPath: IndexPath) {
+        prefetchImage(at: indexPath)
+    }
+
+    // Private
+
+    private func loadData() {
         currentPage += 1
 
         photoListUseCase.execute(requestVal: PhotoListRequestValue(page: currentPage)) { [weak self] result in
@@ -68,19 +87,7 @@ class PhotoListViewModelImpl: PhotoListViewModel {
         }
     }
 
-    // prefetch
-
-    func prefetchImage(at indexPath: IndexPath) {
-        guard let photo = dataSource.itemIdentifier(for: indexPath) else {
-            return
-        }
-
-        imageCache.prefetchImage(for: photo)
-    }
-
-    // load image
-
-    func loadImages(for photo: Photo) {
+    private func loadImages(for photo: Photo) {
 
         imageCache.loadImage(for: photo) { [weak self] item, image in
             guard let `self` = self else { return }
@@ -96,5 +103,13 @@ class PhotoListViewModelImpl: PhotoListViewModel {
                 `self`.dataSource.apply(snapshot, animatingDifferences: false)
             }
         }
+    }
+
+    private func prefetchImage(at indexPath: IndexPath) {
+        guard let photo = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+
+        imageCache.prefetchImage(for: photo)
     }
 }
