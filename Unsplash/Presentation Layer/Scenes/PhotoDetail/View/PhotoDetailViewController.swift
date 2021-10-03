@@ -42,7 +42,7 @@ class PhotoDetailViewController: UIViewController {
     }
 
     private func setupViews() {
-        title = "Detail"
+        navigationController?.navigationBar.topItem?.title = "Photo Detail"
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = true
         horizontalScrollView.delegate = self
