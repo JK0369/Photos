@@ -54,7 +54,7 @@ class HorizontalScrollView: BaseScrollView<HorizontalScrollViewModel> {
 
         DispatchQueue.main.async { [weak self] in
             guard let targetImageview = self?.imageViews[horizontalScrollViewModel.selectedIndex] else { return }
-            self?.scrollToView(view: targetImageview, scrollDirection: .horizontal)
+            self?.scrollToView(view: targetImageview)
         }
     }
 

@@ -28,9 +28,10 @@ protocol PhotoListViewModelInout {
 }
 
 protocol PhotoListViewModelOutput {
+    var scrollPageFromDetailPhoto: Observable<IndexPath> { get }
 }
 
-protocol PhotoListViewModel: PhotoListViewModelInout, PhotoListViewModelOutput {}
+protocol PhotoListViewModel: PhotoListViewModelInout, PhotoListViewModelOutput, PhotoDetailViewModelDelegate {}
 
 class PhotoListViewModelImpl: PhotoListViewModel {
 
@@ -46,6 +47,10 @@ class PhotoListViewModelImpl: PhotoListViewModel {
     var dataSource: UITableViewDiffableDataSource<Section, Photo>!
     lazy var provider: Provider = ProviderImpl()
     lazy var imageCache = ImageCache(provider: provider)
+
+    // Output
+
+    var scrollPageFromDetailPhoto: Observable<IndexPath> = .init(IndexPath(row: 0, section: 0))
 
     // Input
 
@@ -119,5 +124,16 @@ class PhotoListViewModelImpl: PhotoListViewModel {
         }
 
         imageCache.prefetchImage(for: photo)
+    }
+}
+
+// PhotoDetailViewModelDelegate
+
+extension PhotoListViewModelImpl {
+    func didUpdateScroll(to page: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        if page.row < snapshot.numberOfItems, page.section < snapshot.numberOfSections {
+            scrollPageFromDetailPhoto.value = page
+        }
     }
 }

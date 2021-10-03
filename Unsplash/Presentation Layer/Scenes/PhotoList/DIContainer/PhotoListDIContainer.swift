@@ -15,13 +15,17 @@ class PhotoListDIContainer {
     }
 
     private let dependencies: Dependencies
+    weak var photoListViewModel: PhotoListViewModel?
 
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
 
     func makePhotoListViewController(actions: PhotoListViewModelActions) -> UIViewController {
-        let photoListViewController = PhotoListViewController.create(with: makePhotoListViewModel(actions: actions))
+        let photoListViewModel = makePhotoListViewModel(actions: actions)
+        let photoListViewController = PhotoListViewController.create(with: photoListViewModel)
+        self.photoListViewModel = photoListViewModel
+
         return photoListViewController
     }
 
@@ -47,6 +51,12 @@ class PhotoListDIContainer {
 
 extension PhotoListDIContainer: PhotoListCoordinatorDependencies {
     func makePhotoDetailViewController(photos: [Photo], selectedIndexPath: IndexPath) -> UIViewController {
-        return PhotoDetailViewController.create(with: PhotoDetailViewModelImpl(photos: photos, selectedIndexPath: selectedIndexPath))
+        let photoDetailViewModel = PhotoDetailViewModelImpl(photos: photos, selectedIndexPath: selectedIndexPath)
+        if let photoListViewModel = photoListViewModel {
+            photoDetailViewModel.delegate = photoListViewModel
+        }
+
+        let photoDetailViewController = PhotoDetailViewController.create(with: photoDetailViewModel)
+        return photoDetailViewController
     }
 }

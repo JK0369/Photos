@@ -8,6 +8,7 @@
 import Foundation
 
 final class Observable<Value> {
+
     struct Observer<Value> {
         weak var observer: AnyObject?
         let block: (Value) -> Void
@@ -16,7 +17,7 @@ final class Observable<Value> {
     private var observers = [Observer<Value>]()
 
     public var value: Value {
-        didSet { }
+        didSet { notifyObservers() }
     }
 
     public init(_ value: Value) {
@@ -32,7 +33,7 @@ final class Observable<Value> {
         observers = observers.filter { $0.observer !== observer }
     }
 
-    public func notiyObservers() {
+    private func notifyObservers() {
         for observer in observers {
             DispatchQueue.main.async { observer.block(self.value) }
         }

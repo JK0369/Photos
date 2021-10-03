@@ -35,6 +35,7 @@ class PhotoDetailViewController: UIViewController {
         title = "Detail"
         view.backgroundColor = .black
         tabBarController?.tabBar.isHidden = true
+        horizontalScrollView.delegate = self
     }
 
     private func addSubviews() {
@@ -57,5 +58,12 @@ class PhotoDetailViewController: UIViewController {
 
     private func setupImages(with photos: [Photo], selectedRow: Int) {
         horizontalScrollView.model = .init(images: photos.map { $0.image }, selectedIndex: selectedRow)
+    }
+}
+
+extension PhotoDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let currentPage = Int(scrollView.contentOffset.x / scrollView.frame.maxX)
+        viewModel.didUpdateScroll(to: currentPage)
     }
 }

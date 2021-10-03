@@ -20,7 +20,7 @@
 		E04C3E452708C13B00393FD9 /* BaseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E442708C13B00393FD9 /* BaseScrollView.swift */; };
 		E04C3E472708C17000393FD9 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */; };
 		E04C3E492708DDDB00393FD9 /* HorizontalScrollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E482708DDDB00393FD9 /* HorizontalScrollViewModel.swift */; };
-		E04C3E4B2708E07A00393FD9 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E4A2708E07A00393FD9 /* ScrollView.swift */; };
+		E04C3E4B2708E07A00393FD9 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E4A2708E07A00393FD9 /* UIScrollView.swift */; };
 		E06BB95527047F5700F2DFE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95427047F5700F2DFE6 /* AppDelegate.swift */; };
 		E06BB95727047F5700F2DFE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */; };
 		E06BB95E27047F5800F2DFE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E06BB95D27047F5800F2DFE6 /* Assets.xcassets */; };
@@ -69,7 +69,7 @@
 		E04C3E442708C13B00393FD9 /* BaseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollView.swift; sourceTree = "<group>"; };
 		E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
 		E04C3E482708DDDB00393FD9 /* HorizontalScrollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollViewModel.swift; sourceTree = "<group>"; };
-		E04C3E4A2708E07A00393FD9 /* ScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
+		E04C3E4A2708E07A00393FD9 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		E06BB95127047F5700F2DFE6 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E06BB95427047F5700F2DFE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -378,7 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				E06BB9A627049FCA00F2DFE6 /* NSObject.swift */,
-				E04C3E4A2708E07A00393FD9 /* ScrollView.swift */,
+				E04C3E4A2708E07A00393FD9 /* UIScrollView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -554,7 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */,
-				E04C3E4B2708E07A00393FD9 /* ScrollView.swift in Sources */,
+				E04C3E4B2708E07A00393FD9 /* UIScrollView.swift in Sources */,
 				E04C3E472708C17000393FD9 /* HorizontalScrollView.swift in Sources */,
 				E06BB9A227049C1700F2DFE6 /* BaseTableViewCell.swift in Sources */,
 				E06BB988270489A800F2DFE6 /* BaseTabBarController.swift in Sources */,
