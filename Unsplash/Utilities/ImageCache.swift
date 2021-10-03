@@ -22,7 +22,7 @@ protocol ImageCachable {
     func reset()
 }
 
-class ImageCache: ImageCachable {
+class ImageCacheImpl: ImageCachable {
     let provider: Provider
     init(provider: Provider) {
         self.provider = provider

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HorizontalScrollView: BaseScrollView<HorizontalScrollViewModel> {
+class HorizontalScrollView: BaseScrollView<HorizontalScrollModel> {
 
     private let horizontalWidth: CGFloat
     private let horizontalHeight: CGFloat
@@ -28,7 +28,7 @@ class HorizontalScrollView: BaseScrollView<HorizontalScrollViewModel> {
         showsHorizontalScrollIndicator = false
     }
 
-    override func bind(_ model: HorizontalScrollViewModel) {
+    override func bind(_ model: HorizontalScrollModel) {
         super.bind(model)
 
         setImages()
@@ -36,8 +36,8 @@ class HorizontalScrollView: BaseScrollView<HorizontalScrollViewModel> {
     }
 
     private func setImages() {
-        guard let horizontalScrollViewModel = model else { return }
-        horizontalScrollViewModel.images
+        guard let horizontalScrollModel = model else { return }
+        horizontalScrollModel.images
             .enumerated()
             .forEach {
                 let imageView = UIImageView(image: $0.element)
@@ -53,7 +53,7 @@ class HorizontalScrollView: BaseScrollView<HorizontalScrollViewModel> {
             }
 
         DispatchQueue.main.async { [weak self] in
-            guard let targetImageview = self?.imageViews[horizontalScrollViewModel.selectedIndex] else { return }
+            guard let targetImageview = self?.imageViews[horizontalScrollModel.selectedIndex] else { return }
             self?.scrollToView(view: targetImageview)
         }
     }

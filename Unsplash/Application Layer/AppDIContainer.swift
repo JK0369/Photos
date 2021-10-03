@@ -18,6 +18,10 @@ final class AppDIContainer {
         return ProviderImpl()
     }()
 
+    lazy var imageCache: ImageCachable = {
+        return ImageCacheImpl(provider: provider)
+    }()
+
     // MARK: - DIContainers of scenes
 
     func makeTabBarController(viewControllers: [UIViewController]) -> AppTapBarController {
@@ -27,7 +31,7 @@ final class AppDIContainer {
     }
 
     func makePhotoListDIContainer() -> PhotoListDIContainer {
-        let dependencies = PhotoListDIContainer.Dependencies(provider: provider)
+        let dependencies = PhotoListDIContainer.Dependencies(provider: provider, imageCache: imageCache)
 
         return PhotoListDIContainer(dependencies: dependencies)
     }

@@ -12,6 +12,7 @@ class PhotoListDIContainer {
 
     struct Dependencies {
         let provider: Provider
+        let imageCache: ImageCachable
     }
 
     private let dependencies: Dependencies
@@ -44,7 +45,7 @@ class PhotoListDIContainer {
     }
 
     private func makePhotoListViewModel(actions: PhotoListViewModelActions) -> PhotoListViewModel {
-        return PhotoListViewModelImpl(photoListUseCase: makePhotoListUseCase(), actions: actions)
+        return PhotoListViewModelImpl(photoListUseCase: makePhotoListUseCase(), imageCache: dependencies.imageCache, actions: actions)
     }
 
 }

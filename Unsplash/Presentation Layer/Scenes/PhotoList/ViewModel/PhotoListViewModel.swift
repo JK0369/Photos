@@ -37,16 +37,17 @@ class PhotoListViewModelImpl: PhotoListViewModel {
 
     private let photoListUseCase: PhotoListUseCase
     private let actions: PhotoListViewModelActions
+    private let imageCache: ImageCachable
 
-    init(photoListUseCase: PhotoListUseCase, actions: PhotoListViewModelActions) {
+    init(photoListUseCase: PhotoListUseCase, imageCache: ImageCachable, actions: PhotoListViewModelActions) {
         self.photoListUseCase = photoListUseCase
+        self.imageCache = imageCache
         self.actions = actions
     }
 
-    var currentPage: Int = 0
     var dataSource: UITableViewDiffableDataSource<Section, Photo>!
-    lazy var provider: Provider = ProviderImpl()
-    lazy var imageCache = ImageCache(provider: provider)
+    private var currentPage: Int = 0
+    private var viewState = ViewState.idle
 
     // Output
 
@@ -78,9 +79,12 @@ class PhotoListViewModelImpl: PhotoListViewModel {
     // Private
 
     private func loadData() {
+        guard viewState == .idle else { return }
         currentPage += 1
 
+        viewState = .isLoading
         photoListUseCase.execute(requestVal: PhotoListRequestValue(page: currentPage)) { [weak self] result in
+            self?.viewState = .idle
             guard let weakSelf = self else { return }
 
             switch result {

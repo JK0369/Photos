@@ -7,6 +7,16 @@
 
 import UIKit
 
+struct HorizontalScrollModel {
+    var images: [UIImage]
+    var selectedIndex: Int
+
+    init(images: [UIImage], selectedIndex: Int) {
+        self.images = images
+        self.selectedIndex = selectedIndex
+    }
+}
+
 class PhotoDetailViewController: UIViewController {
     static func create(with viewModel: PhotoDetailViewModel) -> PhotoDetailViewController {
         let viewController = PhotoDetailViewController()

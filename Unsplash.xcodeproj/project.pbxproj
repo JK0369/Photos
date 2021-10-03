@@ -19,8 +19,8 @@
 		E04C3E432708BD2000393FD9 /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */; };
 		E04C3E452708C13B00393FD9 /* BaseScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E442708C13B00393FD9 /* BaseScrollView.swift */; };
 		E04C3E472708C17000393FD9 /* HorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */; };
-		E04C3E492708DDDB00393FD9 /* HorizontalScrollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E482708DDDB00393FD9 /* HorizontalScrollViewModel.swift */; };
 		E04C3E4B2708E07A00393FD9 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E4A2708E07A00393FD9 /* UIScrollView.swift */; };
+		E059E4C72709E86100B0FB70 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E059E4C62709E86100B0FB70 /* ViewState.swift */; };
 		E06BB95527047F5700F2DFE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95427047F5700F2DFE6 /* AppDelegate.swift */; };
 		E06BB95727047F5700F2DFE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */; };
 		E06BB95E27047F5800F2DFE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E06BB95D27047F5800F2DFE6 /* Assets.xcassets */; };
@@ -68,8 +68,8 @@
 		E04C3E422708BD2000393FD9 /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
 		E04C3E442708C13B00393FD9 /* BaseScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollView.swift; sourceTree = "<group>"; };
 		E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollView.swift; sourceTree = "<group>"; };
-		E04C3E482708DDDB00393FD9 /* HorizontalScrollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollViewModel.swift; sourceTree = "<group>"; };
 		E04C3E4A2708E07A00393FD9 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
+		E059E4C62709E86100B0FB70 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		E06BB95127047F5700F2DFE6 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E06BB95427047F5700F2DFE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E06BB95627047F5700F2DFE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +141,14 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		E059E4C52709E84E00B0FB70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E059E4C62709E86100B0FB70 /* ViewState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E06BB94827047F5700F2DFE6 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +198,7 @@
 			children = (
 				E06BB96F270481BC00F2DFE6 /* Components */,
 				E06BB96D2704819B00F2DFE6 /* Scenes */,
+				E059E4C52709E84E00B0FB70 /* Models */,
 			);
 			path = "Presentation Layer";
 			sourceTree = "<group>";
@@ -267,7 +276,6 @@
 			children = (
 				E04C3E3C2708BD0900393FD9 /* PhotoDetailViewController.swift */,
 				E04C3E462708C17000393FD9 /* HorizontalScrollView.swift */,
-				E04C3E482708DDDB00393FD9 /* HorizontalScrollViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,11 +575,11 @@
 				E07FA61927084F7C004B7E3D /* Photo.swift in Sources */,
 				E07FA61B27084F7C004B7E3D /* NetworkResponseMock.swift in Sources */,
 				E07FA61C27084F7C004B7E3D /* PhotoListRequestDTO.swift in Sources */,
+				E059E4C72709E86100B0FB70 /* ViewState.swift in Sources */,
 				E06BB9852704879F00F2DFE6 /* AppTapBarController.swift in Sources */,
 				E06BB99727048DAE00F2DFE6 /* Observable.swift in Sources */,
 				E04C3E392708BCF400393FD9 /* PhotoSearchViewModel.swift in Sources */,
 				E06BB9A02704960F00F2DFE6 /* BaseViewController.swift in Sources */,
-				E04C3E492708DDDB00393FD9 /* HorizontalScrollViewModel.swift in Sources */,
 				E07FA60827084EF4004B7E3D /* Provider.swift in Sources */,
 				E07FA60E27084F4A004B7E3D /* ImageCache.swift in Sources */,
 				E07FA60A27084EF4004B7E3D /* Requestable.swift in Sources */,
