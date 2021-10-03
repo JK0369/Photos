@@ -9,6 +9,8 @@ import Foundation
 
 final class Observable<Value> {
 
+    var isInitValue = true
+
     struct Observer<Value> {
         weak var observer: AnyObject?
         let block: (Value) -> Void
@@ -26,7 +28,10 @@ final class Observable<Value> {
 
     public func observe(on observer: AnyObject, observerBlock: @escaping (Value) -> Void) {
         observers.append(Observer(observer: observer, block: observerBlock))
-        observerBlock(self.value)
+        if !isInitValue {
+            observerBlock(self.value)
+        }
+        isInitValue = false
     }
 
     public func remove(observer: AnyObject) {

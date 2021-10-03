@@ -103,7 +103,13 @@ class PhotoSearchViewController: UIViewController {
     }
 
     private func bindOutput() {
+        viewModel.emptySearchResult.observe(on: self) { [weak self] in self?.updateSearchEmptyView() }
         viewModel.scrollPageFromDetailPhoto.observe(on: self) { [weak self] in self?.updateScroll(to: $0) }
+    }
+
+    private func updateSearchEmptyView() {
+        searchEmptyView.isHidden = false
+        searchEmptyView.model = .emptyResult
     }
 
     private func updateScroll(to page: IndexPath) {
@@ -146,7 +152,9 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
 
 extension PhotoSearchViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchEmptyView.model = .requiredQuery
         searchEmptyView.isHidden = searchBar.text?.isEmpty == false
+
         viewModel.didTapReuturnKey(with: searchBar.text ?? "")
     }
 }

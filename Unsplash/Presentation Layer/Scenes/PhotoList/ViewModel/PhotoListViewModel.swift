@@ -68,7 +68,8 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
 
     func didSelectRow(at indexPath: IndexPath) {
         let photos = dataSource.snapshot().itemIdentifiers
-        actions.showPhotoDetail(photos, indexPath)
+        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage }
+        actions.showPhotoDetail(finishFetchPhotos, indexPath)
     }
 
     // Private

@@ -23,6 +23,7 @@ protocol PhotoSearchViewModelInput {
 }
 
 protocol PhotoSearchViewModelOutput {
+    var emptySearchResult: Observable<Void> { get }
     var scrollPageFromDetailPhoto: Observable<IndexPath> { get }
 }
 
@@ -47,6 +48,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
 
     // Output
 
+    var emptySearchResult: Observable<Void> = .init(())
     var scrollPageFromDetailPhoto: Observable<IndexPath> = .init(IndexPath(row: 0, section: 0))
 
     // Input
@@ -65,7 +67,8 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
 
     func didSelectItem(at indexPath: IndexPath) {
         let photos = dataSource.snapshot().itemIdentifiers
-        actions.showPhotoDetail(photos, indexPath)
+        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage }
+        actions.showPhotoDetail(finishFetchPhotos, indexPath)
     }
 
     func didTapReuturnKey(with query: String) {
@@ -75,18 +78,32 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
     // Private
 
     private func loadData(with query: String = "") {
-        guard viewState == .idle, let searchQuery = getSearchQuery(compared: query) else { return }
-        lastQuery = searchQuery
-        currentPage += 1
+        guard viewState == .idle else { return }
+        키워드로 다시 검색
+        guard lastQuery != query else {
+            // 다른 키워드로 다시 검색한 경우
+            currentPage = 0
+            var snapshot = dataSource.snapshot()
+            snapshot.deleteAllItems()
+            dataSource.apply(snapshot)
+            lastQuery = ""
+            return
+        }
+        lastQuery = query
+
+        print(query)
 
         // TODO: API
         viewState = .isLoading
-        photoSearchUseCase.execute(requestVal: PhotoSearchRequestValue(query: searchQuery, page: currentPage)) { [weak self] result in
+        photoSearchUseCase.execute(requestVal: PhotoSearchRequestValue(query: query, page: currentPage)) { [weak self] result in
             self?.viewState = .idle
             guard let weakSelf = self else { return }
 
             switch result {
             case .success(let photos):
+                if photos.isEmpty {
+                    self?.emptySearchResult.value = ()
+                }
                 var snapshot = weakSelf.dataSource.snapshot()
                 if snapshot.sectionIdentifiers.isEmpty {
                     snapshot.appendSections([.main])
@@ -100,11 +117,6 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
                 print(error)
             }
         }
-    }
-
-    private func getSearchQuery(compared query: String) -> String? {
-        let searchQuery = query.isEmpty ? lastQuery : query
-        return searchQuery.isEmpty ? nil : searchQuery
     }
 
     private func loadImages(for photo: Photo) {

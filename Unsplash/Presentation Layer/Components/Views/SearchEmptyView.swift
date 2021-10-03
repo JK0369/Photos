@@ -7,11 +7,24 @@
 
 import UIKit
 
-class SearchEmptyView: BaseView<Void> {
-    lazy var informationLabel: UILabel = {
+enum SearchMessageType {
+    case requiredQuery
+    case emptyResult
+
+    var message: String {
+        switch self {
+        case .requiredQuery: return "검색창에서 키워드로\n사진을 검색해주세요."
+        case .emptyResult: return "해당 키워드에 대한 정보가 없습니다.\n다른 키워드로 다시 검색해주세요"
+        }
+    }
+}
+
+class SearchEmptyView: BaseView<SearchMessageType> {
+
+    private lazy var informationLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "검색창에서 키워드로\n사진을 검색해주세요."
+        label.text = SearchMessageType.requiredQuery.message
         label.textColor = .lightGray
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
@@ -43,6 +56,12 @@ class SearchEmptyView: BaseView<Void> {
             informationLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             informationLabel.topAnchor.constraint(equalTo: topAnchor)
         ])
+    }
+
+    override func bind(_ model: SearchMessageType) {
+        super.bind(model)
+
+        informationLabel.text = model.message
     }
 }
 

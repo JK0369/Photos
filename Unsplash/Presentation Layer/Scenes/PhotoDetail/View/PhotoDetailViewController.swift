@@ -8,10 +8,10 @@
 import UIKit
 
 struct HorizontalScrollModel {
-    var images: [UIImage]
+    var images: [UIImage?]
     var selectedIndex: Int
 
-    init(images: [UIImage], selectedIndex: Int) {
+    init(images: [UIImage?], selectedIndex: Int) {
         self.images = images
         self.selectedIndex = selectedIndex
     }
@@ -33,12 +33,12 @@ class PhotoDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLoad()
 
         setupViews()
         addSubviews()
         makeConstraints()
         bindOutput()
+        viewModel.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -37,7 +37,7 @@ extension PhotoSearchResponseDTO {
     func toDomain() -> [Photo] {
         var photos = [Photo]()
         results.forEach { result in
-            let photo = Photo(image: UIImage(systemName: "square")!,
+            let photo = Photo(image: .placeholderImage,
                               imageUrl: URL(string: result.urls.small)!,
                               username: result.user.username)
             photos.append(photo)

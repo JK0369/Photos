@@ -101,7 +101,7 @@ extension PhotoListViewController: UITableViewDelegate {
         let heightRemainFromBottom = contentHeight - yOffset
 
         let frameHeight = scrollView.frame.size.height
-        if heightRemainFromBottom < frameHeight * 2 {
+        if heightRemainFromBottom < frameHeight {
             viewModel.scrollViewDidScroll()
         }
     }

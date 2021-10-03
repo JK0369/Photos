@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol Item {
-    var image: UIImage { get set }
+    var image: UIImage? { get set }
     var imageUrl: URL { get }
     var identifier: UUID { get }
 }
@@ -97,7 +97,6 @@ class ImageCacheImpl: ImageCachable {
         prefetches.removeAll()
         cache.removeAllObjects()
     }
-
 
     // Cache
 
