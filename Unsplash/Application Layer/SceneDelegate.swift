@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         appCoordinator = AppCoordinator(appDIContainer: appDIContainer,
-                                        photoListDIContainer: appDIContainer.makePhotoListDIContainer())
+                                        photoListDIContainer: appDIContainer.makePhotoListDIContainer(),
+                                        photoSearchDIContainer: appDIContainer.makePhotoSearchDIContainer())
         appCoordinator?.start(with: window)
         window.makeKeyAndVisible()
     }

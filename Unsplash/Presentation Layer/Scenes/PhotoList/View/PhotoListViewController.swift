@@ -51,9 +51,8 @@ class PhotoListViewController: UIViewController {
     }
 
     private func setupViews() {
-        title = "Unsplash"
         view.backgroundColor = .black
-        tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "photo"), tag: 0)
+        navigationController?.navigationBar.topItem?.title = "Unsplash"
     }
 
     private func addSubviews() {
@@ -78,10 +77,9 @@ class PhotoListViewController: UIViewController {
     private func setupTableViewDiffableDataSource() {
         viewModel.dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
-
-            self?.viewModel.didUpdateCell(for: photo)
             (cell as? PhotoTableViewCell)?.model = photo
-
+            self?.viewModel.didUpdateCell(for: photo)
+            
             return cell
         })
         viewModel.didSetupDiffableDataSource()
@@ -103,7 +101,7 @@ extension PhotoListViewController: UITableViewDelegate {
         let heightRemainFromBottom = contentHeight - yOffset
 
         let frameHeight = scrollView.frame.size.height
-        if heightRemainFromBottom < frameHeight {
+        if heightRemainFromBottom < frameHeight * 2 {
             viewModel.scrollViewDidScroll()
         }
     }

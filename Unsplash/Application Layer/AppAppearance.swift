@@ -20,6 +20,8 @@ final class AppAppearance {
         // TabBar
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = .white
     }
 }
 

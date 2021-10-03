@@ -12,27 +12,35 @@ final class AppDIContainer {
 
     lazy var appConfiguration = AppConfiguration()
 
-    // MARK: - Network
+    // Network
 
     lazy var provider: Provider = {
         return ProviderImpl()
     }()
 
+    // Util
+
     lazy var imageCache: ImageCachable = {
         return ImageCacheImpl(provider: provider)
     }()
 
-    // MARK: - DIContainers of scenes
-
-    func makeTabBarController(viewControllers: [UIViewController]) -> AppTapBarController {
-        let appTapBarController = AppTapBarController.create(with: viewControllers)
-
-        return appTapBarController
-    }
+    // DIContainers of scenes
 
     func makePhotoListDIContainer() -> PhotoListDIContainer {
         let dependencies = PhotoListDIContainer.Dependencies(provider: provider, imageCache: imageCache)
 
         return PhotoListDIContainer(dependencies: dependencies)
+    }
+
+    func makePhotoSearchDIContainer() -> PhotoSearchDIContainer {
+        let dependencies = PhotoSearchDIContainer.Dependencies(provider: provider, imageCache: imageCache)
+
+        return PhotoSearchDIContainer(dependencies: dependencies)
+    }
+
+    func makeTabBarController(viewControllers: [UIViewController]) -> AppTabBarController {
+        let appTabBarController = AppTabBarController.create(with: viewControllers)
+
+        return appTabBarController
     }
 }

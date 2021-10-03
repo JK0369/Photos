@@ -30,7 +30,7 @@ class PhotoListDIContainer {
         return photoListViewController
     }
 
-    func makePhotoCoordinator(navigationController: UINavigationController) -> PhotoListCoordinator {
+    func makePhotoListCoordinator(navigationController: UINavigationController) -> PhotoListCoordinator {
         return PhotoListCoordinator(navigationConroller: navigationController, dependencies: self)
     }
 

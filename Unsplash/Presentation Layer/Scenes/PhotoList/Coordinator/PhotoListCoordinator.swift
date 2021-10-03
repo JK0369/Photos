@@ -20,9 +20,7 @@ class PhotoListCoordinator {
         self.dependencies = dependencies
     }
 
-    // Private
-
-    private func showPhotoDetail(photos: [Photo], selectedIndexPath: IndexPath) {
+    func showPhotoDetail(photos: [Photo], selectedIndexPath: IndexPath) {
         let photoDetailViewController = dependencies.makePhotoDetailViewController(photos: photos, selectedIndexPath: selectedIndexPath)
         navigationConroller?.pushViewController(photoDetailViewController, animated: true)
     }

@@ -11,23 +11,36 @@ import UIKit
 class AppCoordinator {
     private let appDIContainer: AppDIContainer
     private let photoListDIContainer: PhotoListDIContainer
-    private var appTabBarController: UITabBarController?
+    private let photoSearchDIContainer: PhotoSearchDIContainer
 
-    init(appDIContainer: AppDIContainer, photoListDIContainer: PhotoListDIContainer) {
+    init(appDIContainer: AppDIContainer, photoListDIContainer: PhotoListDIContainer, photoSearchDIContainer: PhotoSearchDIContainer) {
         self.appDIContainer = appDIContainer
         self.photoListDIContainer = photoListDIContainer
+        self.photoSearchDIContainer = photoSearchDIContainer
     }
 
     func start(with window: UIWindow) {
-        let viewControllers = [photoListDIContainer.makePhotoListViewController(actions: PhotoListViewModelActions(showPhotoDetail: showPhotoDetail))]
-        let tabBarController = appDIContainer.makeTabBarController(viewControllers: viewControllers)
-        appTabBarController = tabBarController
 
+        // PhotoList
+
+        let photoListNavigationController = UINavigationController()
+        let photoListCoordinator = photoListDIContainer.makePhotoListCoordinator(navigationController: photoListNavigationController)
+        let photoListViewModelActions = PhotoListViewModelActions(showPhotoDetail: photoListCoordinator.showPhotoDetail(photos:selectedIndexPath:))
+        let photoListViewController = photoListDIContainer.makePhotoListViewController(actions: photoListViewModelActions)
+        photoListNavigationController.setViewControllers([photoListViewController], animated: false)
+
+        // PhotoSearch
+
+        let photoSearchNavigationController = UINavigationController()
+        let photoSearchCoordinator = photoSearchDIContainer.makePhotoSearchCoordinator(navigationController: photoSearchNavigationController)
+        let photoSearchViewModelActions = PhotoSearchViewModelActions(showPhotoDetail: photoSearchCoordinator.showPhotoDetail(photos:selectedIndexPath:))
+        let photoSearchViewController = photoSearchDIContainer.makePhotoSearchViewController(actions: photoSearchViewModelActions)
+        photoSearchNavigationController.setViewControllers([photoSearchViewController], animated: false)
+
+        // AppTabBar
+
+        let tabBarController = appDIContainer.makeTabBarController(viewControllers: [photoListNavigationController,
+                                                                                     photoSearchNavigationController])
         window.rootViewController = tabBarController
-    }
-
-    private func showPhotoDetail(photos: [Photo], selectedIndexPath: IndexPath) {
-        let viewController = photoListDIContainer.makePhotoDetailViewController(photos: photos, selectedIndexPath: selectedIndexPath)
-        (appTabBarController?.selectedViewController as? UINavigationController)?.pushViewController(viewController, animated: true)
     }
 }

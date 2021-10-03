@@ -6,15 +6,10 @@
 //
 
 import Foundation
-
 import UIKit
 
 struct PhotoListViewModelActions {
     let showPhotoDetail: (_ photos: [Photo], _ selectedIndexPath: IndexPath) -> Void
-}
-
-enum Section: Int, CaseIterable {
-    case main
 }
 
 protocol PhotoListViewModelInout {
@@ -33,7 +28,7 @@ protocol PhotoListViewModelOutput {
 
 protocol PhotoListViewModel: PhotoListViewModelInout, PhotoListViewModelOutput, PhotoDetailViewModelDelegate {}
 
-class PhotoListViewModelImpl: PhotoListViewModel {
+final class PhotoListViewModelImpl: PhotoListViewModel {
 
     private let photoListUseCase: PhotoListUseCase
     private let actions: PhotoListViewModelActions
