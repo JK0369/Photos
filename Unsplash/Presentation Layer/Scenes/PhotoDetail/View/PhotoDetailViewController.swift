@@ -41,6 +41,12 @@ class PhotoDetailViewController: UIViewController {
         bindOutput()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewModel.viewWillAppear()
+    }
+
     private func setupViews() {
         navigationController?.navigationBar.topItem?.title = "Photo Detail"
         view.backgroundColor = .black
@@ -64,10 +70,15 @@ class PhotoDetailViewController: UIViewController {
 
     private func bindOutput() {
         viewModel.currentImage.observe(on: self, observerBlock: { [weak self] in self?.setupImages(with: $0, selectedRow: $1) })
+        viewModel.photoTitle.observe(on: self, observerBlock: { [weak self] in self?.updateNavigationTitle(to: $0) })
     }
 
     private func setupImages(with photos: [Photo], selectedRow: Int) {
         horizontalScrollView.model = .init(images: photos.map { $0.image }, selectedIndex: selectedRow)
+    }
+
+    private func updateNavigationTitle(to title: String) {
+        navigationController?.navigationBar.topItem?.title = title
     }
 }
 

@@ -31,6 +31,8 @@ struct PhotoListResponseDTO: Decodable {
 extension PhotoListResponseDTO {
     // TODO: 강제 unwrap
     func toDomain() -> Photo {
-        return Photo(image: UIImage(systemName: "circle")!, imageUrl: URL(string: urls.small)!)
+        return Photo(image: UIImage(systemName: "circle")!,
+                     imageUrl: URL(string: urls.small)!,
+                     username: user.username)
     }
 }

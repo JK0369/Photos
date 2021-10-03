@@ -13,11 +13,13 @@ protocol PhotoDetailViewModelDelegate: AnyObject {
 
 protocol PhotoDetailViewModelInout {
     func viewDidLoad()
+    func viewWillAppear()
     func didUpdateScroll(to page: Int)
 }
 
 protocol PhotoDetailViewModelOutput {
     var currentImage: Observable<([Photo], Int)> { get }
+    var photoTitle: Observable<String> { get }
 }
 
 protocol PhotoDetailViewModel: PhotoDetailViewModelInout, PhotoDetailViewModelOutput {}
@@ -36,6 +38,7 @@ class PhotoDetailViewModelImpl: PhotoDetailViewModel {
     // Output
 
     var currentImage: Observable<([Photo], Int)> = .init(([], 0))
+    var photoTitle: Observable<String> = .init("")
 
     // Input
 
@@ -43,7 +46,12 @@ class PhotoDetailViewModelImpl: PhotoDetailViewModel {
         currentImage.value = (photos, selectedIndexPath.row)
     }
 
+    func viewWillAppear() {
+        photoTitle.value = photos[selectedIndexPath.row].username
+    }
+
     func didUpdateScroll(to page: Int) {
+        photoTitle.value = photos[page].username
         delegate?.didUpdateScroll(to: IndexPath(row: page, section: 0))
     }
 }

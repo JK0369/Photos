@@ -12,10 +12,12 @@ class Photo: Item {
     var image: UIImage
     var imageUrl: URL
     var identifier = UUID()
+    var username: String
 
-    init(image: UIImage, imageUrl: URL) {
+    init(image: UIImage, imageUrl: URL, username: String) {
         self.image = image
         self.imageUrl = imageUrl
+        self.username = username
     }
 }
 
