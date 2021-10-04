@@ -39,8 +39,8 @@ class AppCoordinator {
 
         // AppTabBar
 
-        let tabBarController = appDIContainer.makeTabBarController(viewControllers: [photoListNavigationController,
-                                                                                     photoSearchNavigationController])
+        let tabBarController = appDIContainer.makeAppTabBarController(viewControllers: [photoListNavigationController,
+                                                                                        photoSearchNavigationController])
         window.rootViewController = tabBarController
     }
 }

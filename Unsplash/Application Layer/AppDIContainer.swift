@@ -36,7 +36,7 @@ final class AppDIContainer {
         return PhotoSearchDIContainer(dependencies: dependencies)
     }
 
-    func makeTabBarController(viewControllers: [UIViewController]) -> AppTabBarController {
+    func makeAppTabBarController(viewControllers: [UIViewController]) -> AppTabBarController {
         let appTabBarController = AppTabBarController.create(with: viewControllers)
 
         return appTabBarController
