@@ -621,9 +621,9 @@
 		E0C06350270ADF8A00A93C19 /* UnsplashTests */ = {
 			isa = PBXGroup;
 			children = (
-				E0C06358270ADF8E00A93C19 /* Data Layer */,
-				E00531F2270AFF7700740CB9 /* Domain Layer */,
 				E00531F3270AFF8100740CB9 /* Presentstion Layer */,
+				E00531F2270AFF7700740CB9 /* Domain Layer */,
+				E0C06358270ADF8E00A93C19 /* Data Layer */,
 			);
 			path = UnsplashTests;
 			sourceTree = "<group>";
