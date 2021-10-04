@@ -36,8 +36,8 @@ class PhotoListViewController: UIViewController {
         setupViews()
         addSubviews()
         makeConstraints()
-        setupTableViewDiffableDataSource()
         bindOutput()
+        viewModel.viewDidLoad(with: tableView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,17 +68,6 @@ class PhotoListViewController: UIViewController {
 
     private func bindOutput() {
         viewModel.scrollPageFromDetailPhoto.observe(on: self) { [weak self] in self?.updateScroll(to: $0) }
-    }
-
-    private func setupTableViewDiffableDataSource() {
-        viewModel.dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
-            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
-            (cell as? PhotoTableViewCell)?.model = photo
-            self?.viewModel.didUpdateCell(for: photo)
-            
-            return cell
-        })
-        viewModel.didSetupDiffableDataSource()
     }
 
     private func updateScroll(to page: IndexPath) {

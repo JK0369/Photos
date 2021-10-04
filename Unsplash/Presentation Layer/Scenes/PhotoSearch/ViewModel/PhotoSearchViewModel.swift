@@ -13,10 +13,8 @@ struct PhotoSearchViewModelActions {
 }
 
 protocol PhotoSearchViewModelInput {
-    var dataSource: UICollectionViewDiffableDataSource<Section, Photo>! { get set }
-
+    func viewDidLoad(with collectionView: UICollectionView)
     func scrollViewDidScroll()
-    func didUpdateCell(for photo: Photo)
     func prefetchItem(at indexPath: IndexPath)
     func didSelectItem(at indexPath: IndexPath)
     func didTapReuturnKey(with query: String)
@@ -41,8 +39,8 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
         self.actions = actions
     }
 
-    var dataSource: UICollectionViewDiffableDataSource<Section, Photo>!
-    private var currentPage: Int = 0
+    var currentPage: Int = 0
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Photo>!
     private var viewState = ViewState.idle
     private var lastQuery = ""
 
@@ -53,13 +51,13 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
 
     // Input
 
+    func viewDidLoad(with collectionView: UICollectionView) {
+        setupCollectionViewDiffableDataSource(with: collectionView)
+    }
+
     func scrollViewDidScroll() {
         guard !lastQuery.isEmpty else { return }
         loadData(with: lastQuery)
-    }
-
-    func didUpdateCell(for photo: Photo) {
-        loadImages(for: photo)
     }
 
     func prefetchItem(at indexPath: IndexPath) {
@@ -77,6 +75,18 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
     }
 
     // Private
+
+    private func setupCollectionViewDiffableDataSource(with collectionView: UICollectionView) {
+        dataSource = UICollectionViewDiffableDataSource<Section, Photo>(collectionView: collectionView,
+                                                                                  cellProvider: { [weak self] collectionView, indexPath, photo in
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath)
+            (cell as? PhotoCollectionViewCell)?.model = photo
+            self?.loadImages(for: photo)
+
+            return cell
+        })
+    }
 
     private func loadData(with query: String) {
         guard viewState == .idle else { return }

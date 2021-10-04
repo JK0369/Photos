@@ -13,11 +13,8 @@ struct PhotoListViewModelActions {
 }
 
 protocol PhotoListViewModelInout {
-    var dataSource: UITableViewDiffableDataSource<Section, Photo>! { get set }
-
-    func didSetupDiffableDataSource()
+    func viewDidLoad(with tableView: UITableView)
     func scrollViewDidScroll()
-    func didUpdateCell(for photo: Photo)
     func prefetchRow(at indexPath: IndexPath)
     func didSelectRow(at indexPath: IndexPath)
 }
@@ -40,8 +37,8 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
         self.actions = actions
     }
 
-    var dataSource: UITableViewDiffableDataSource<Section, Photo>!
-    private var currentPage: Int = 0
+    var currentPage: Int = 0
+    private var dataSource: UITableViewDiffableDataSource<Section, Photo>!
     private var viewState = ViewState.idle
 
     // Output
@@ -50,16 +47,13 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
 
     // Input
 
-    func didSetupDiffableDataSource() {
+    func viewDidLoad(with tableView: UITableView) {
+        setupTableViewDiffableDataSource(with: tableView)
         loadData()
     }
 
     func scrollViewDidScroll() {
         loadData()
-    }
-
-    func didUpdateCell(for photo: Photo) {
-        loadImages(for: photo)
     }
 
     func prefetchRow(at indexPath: IndexPath) {
@@ -73,6 +67,20 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
     }
 
     // Private
+
+    private func setupTableViewDiffableDataSource(with tableView: UITableView) {
+        dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
+            (cell as? PhotoTableViewCell)?.model = photo
+            self?.didUpdateCell(for: photo)
+
+            return cell
+        })
+    }
+
+    private func didUpdateCell(for photo: Photo) {
+        loadImages(for: photo)
+    } 
 
     private func loadData() {
         guard viewState == .idle else { return }

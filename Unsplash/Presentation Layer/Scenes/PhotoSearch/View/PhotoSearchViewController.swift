@@ -40,9 +40,9 @@ class PhotoSearchViewController: UIViewController {
         setupViews()
         addSubviews()
         makeConstraints()
-        setupCollectionViewDiffableDataSource()
         setupSearchController()
         bindOutput()
+        viewModel.viewDidLoad(with: collectionView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,18 +81,6 @@ class PhotoSearchViewController: UIViewController {
             searchEmptyView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
             searchEmptyView.topAnchor.constraint(equalTo: collectionView.topAnchor)
         ])
-    }
-
-    private func setupCollectionViewDiffableDataSource() {
-        viewModel.dataSource = UICollectionViewDiffableDataSource<Section, Photo>(collectionView: collectionView,
-                                                                                  cellProvider: { [weak self] collectionView, indexPath, photo in
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath)
-            (cell as? PhotoCollectionViewCell)?.model = photo
-            self?.viewModel.didUpdateCell(for: photo)
-
-            return cell
-        })
     }
 
     private func setupSearchController() {
