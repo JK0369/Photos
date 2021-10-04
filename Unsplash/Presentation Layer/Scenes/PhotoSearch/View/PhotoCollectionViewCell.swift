@@ -29,6 +29,14 @@ class PhotoCollectionViewCell: BaseCollectinoViewCell<Photo> {
         return view
     }()
 
+    lazy var photoUserNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white.withAlphaComponent(0.7)
+        label.font = .systemFont(ofSize: 14)
+
+        return label
+    }()
+
     override func configure() {
         super.configure()
 
@@ -39,6 +47,7 @@ class PhotoCollectionViewCell: BaseCollectinoViewCell<Photo> {
     private func addSubviews() {
         contentView.addSubview(placeholderImageView)
         contentView.addSubview(photoImageView)
+        photoImageView.addSubview(photoUserNameLabel)
     }
 
     private func makeConstraints() {
@@ -49,11 +58,18 @@ class PhotoCollectionViewCell: BaseCollectinoViewCell<Photo> {
             photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
         ])
+
+        photoUserNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            photoUserNameLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: 12),
+            photoUserNameLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -12)
+        ])
     }
 
     override func bind(_ model: Photo) {
         super.bind(model)
 
         photoImageView.image = model.image
+        photoUserNameLabel.text = model.username
     }
 }

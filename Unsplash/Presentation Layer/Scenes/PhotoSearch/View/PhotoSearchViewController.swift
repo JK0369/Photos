@@ -162,10 +162,12 @@ extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
 // SearchBar Delegate
 
 extension PhotoSearchViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchEmptyView.model = .requiredQuery
         searchEmptyView.isHidden = searchBar.text?.isEmpty == false
 
         viewModel.didTapReuturnKey(with: searchBar.text ?? "")
     }
+    
 }

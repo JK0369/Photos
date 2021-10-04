@@ -54,6 +54,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
     // Input
 
     func scrollViewDidScroll() {
+        guard !lastQuery.isEmpty else { return }
         loadData(with: lastQuery)
     }
 

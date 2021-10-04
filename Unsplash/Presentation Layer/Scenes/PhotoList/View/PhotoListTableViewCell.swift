@@ -18,6 +18,14 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
         return view
     }()
 
+    lazy var photoUserNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white.withAlphaComponent(0.7)
+        label.font = .systemFont(ofSize: 14)
+
+        return label
+    }()
+
     override func configure() {
         super.configure()
 
@@ -27,6 +35,7 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
 
     private func addSubviews() {
         contentView.addSubview(photoImageView)
+        photoImageView.addSubview(photoUserNameLabel)
     }
 
     override func layoutSubviews() {
@@ -37,19 +46,25 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
 
     private func makeConstraints() {
         photoImageView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
             photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
         ])
+
+        photoUserNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            photoUserNameLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: 12),
+            photoUserNameLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -12)
+        ])
     }
 
     override func bind(_ model: Photo) {
         super.bind(model)
+
         photoImageView.image = model.image
-        photoImageView.sizeToFit()
+        photoUserNameLabel.text = model.username
     }
 
 }
