@@ -22,7 +22,7 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
     lazy var photoUserNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white.withAlphaComponent(0.7)
-        label.font = .systemFont(ofSize: 14)
+        label.font = .title2Regular
 
         return label
     }()

@@ -26,7 +26,7 @@ class SearchEmptyView: BaseView<SearchMessageType> {
         label.numberOfLines = 0
         label.text = SearchMessageType.requiredQuery.message
         label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 20)
+        label.font = .title1Regular
         label.textAlignment = .center
 
         return label

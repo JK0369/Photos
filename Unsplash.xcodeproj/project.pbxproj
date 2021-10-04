@@ -13,6 +13,7 @@
 		E00531F7270B049200740CB9 /* PhotoSearchUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531F6270B049200740CB9 /* PhotoSearchUseCaseTests.swift */; };
 		E00531FA270B069600740CB9 /* PhotoListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531F9270B069600740CB9 /* PhotoListViewModelTests.swift */; };
 		E00531FC270B138E00740CB9 /* PhotoSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531FB270B138E00740CB9 /* PhotoSearchViewModelTests.swift */; };
+		E0053200270B17BA00740CB9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531FF270B17BA00740CB9 /* UIFont.swift */; };
 		E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */; };
 		E04C3E0F27087DE400393FD9 /* PhotoListRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */; };
 		E04C3E312708B43500393FD9 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E302708B43500393FD9 /* AppAppearance.swift */; };
@@ -93,6 +94,7 @@
 		E00531F6270B049200740CB9 /* PhotoSearchUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchUseCaseTests.swift; sourceTree = "<group>"; };
 		E00531F9270B069600740CB9 /* PhotoListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewModelTests.swift; sourceTree = "<group>"; };
 		E00531FB270B138E00740CB9 /* PhotoSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchViewModelTests.swift; sourceTree = "<group>"; };
+		E00531FF270B17BA00740CB9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepository.swift; sourceTree = "<group>"; };
 		E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepositoryImpl.swift; sourceTree = "<group>"; };
 		E04C3E302708B43500393FD9 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				E04C3E4A2708E07A00393FD9 /* UIScrollView.swift */,
 				E059E4CA2709EBD600B0FB70 /* UICollectionViewLayout.swift */,
 				E059E4E0270A260200B0FB70 /* UIImage.swift */,
+				E00531FF270B17BA00740CB9 /* UIFont.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				E06BB95727047F5700F2DFE6 /* SceneDelegate.swift in Sources */,
 				E06BB98E27048BB100F2DFE6 /* PhotoListCoordinator.swift in Sources */,
 				E04C3E352708BCDD00393FD9 /* PhotoSearchDIContainer.swift in Sources */,
+				E0053200270B17BA00740CB9 /* UIFont.swift in Sources */,
 				E07FA6202708501A004B7E3D /* PhotoListUseCase.swift in Sources */,
 				E059E4D12709F25E00B0FB70 /* PhotoSearchUseCase.swift in Sources */,
 				E07FA61D27084F7C004B7E3D /* PhotoListResponseDTO.swift in Sources */,
