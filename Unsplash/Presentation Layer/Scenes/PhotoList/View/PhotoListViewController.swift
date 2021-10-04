@@ -30,10 +30,6 @@ class PhotoListViewController: UIViewController {
 
     private var viewModel: PhotoListViewModel!
 
-    var photos = [Photo]()
-    var provider: Provider? = ProviderImpl()
-    var currentPage = 0
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
