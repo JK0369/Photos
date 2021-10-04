@@ -62,7 +62,8 @@ class PhotoCollectionViewCell: BaseCollectinoViewCell<Photo> {
         photoUserNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             photoUserNameLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: 12),
-            photoUserNameLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -12)
+            photoUserNameLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -12),
+            photoUserNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: photoImageView.trailingAnchor, constant: -12),
         ])
     }
 
