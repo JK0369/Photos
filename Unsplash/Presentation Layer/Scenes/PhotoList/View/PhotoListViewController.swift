@@ -86,8 +86,6 @@ class PhotoListViewController: UIViewController {
     }
 
     private func updateScroll(to page: IndexPath) {
-        guard viewModel.dataSource.snapshot().numberOfItems != 0 else { return }
-
         DispatchQueue.main.async { [weak self] in
             self?.tableView.scrollToRow(at: page, at: .bottom, animated: false)
         }

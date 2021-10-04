@@ -150,7 +150,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
 extension PhotoSearchViewModelImpl {
     func didUpdateScroll(to page: IndexPath) {
         let snapshot = dataSource.snapshot()
-        if page.row < snapshot.numberOfItems, page.section < snapshot.numberOfSections {
+        if page.row < snapshot.numberOfItems, page.section < snapshot.numberOfSections, dataSource.snapshot().numberOfItems != 0 {
             scrollPageFromDetailPhoto.value = page
         }
     }
