@@ -9,11 +9,11 @@ import UIKit
 
 struct HorizontalScrollModel {
     var images: [UIImage?]
-    var selectedIndex: Int
+    var initSelectedIndex: Int
 
-    init(images: [UIImage?], selectedIndex: Int) {
+    init(images: [UIImage?], initSelectedIndex: Int) {
         self.images = images
-        self.selectedIndex = selectedIndex
+        self.initSelectedIndex = initSelectedIndex
     }
 }
 
@@ -28,7 +28,7 @@ class PhotoDetailViewController: UIViewController {
     private var viewModel: PhotoDetailViewModel!
 
     private lazy var horizontalScrollView: HorizontalScrollView = {
-        return HorizontalScrollView(horizontalWidth: UIScreen.main.bounds.width, horizontalHeight: view.frame.height)
+        return HorizontalScrollView(horizontalWidth: view.bounds.width, horizontalHeight: view.bounds.height)
     }()
 
     override func viewDidLoad() {
@@ -69,12 +69,12 @@ class PhotoDetailViewController: UIViewController {
     }
 
     private func bindOutput() {
-        viewModel.currentImage.observe(on: self, observerBlock: { [weak self] in self?.setupImages(with: $0, selectedRow: $1) })
+        viewModel.images.observe(on: self, observerBlock: { [weak self] in self?.setupImages(with: $0, selectedRow: $1) })
         viewModel.photoTitle.observe(on: self, observerBlock: { [weak self] in self?.updateNavigationTitle(to: $0) })
     }
 
     private func setupImages(with photos: [Photo], selectedRow: Int) {
-        horizontalScrollView.model = .init(images: photos.map { $0.image }, selectedIndex: selectedRow)
+        horizontalScrollView.model = .init(images: photos.map { $0.image }, initSelectedIndex: selectedRow)
     }
 
     private func updateNavigationTitle(to title: String) {

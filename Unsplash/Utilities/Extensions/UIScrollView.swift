@@ -16,7 +16,8 @@ extension UIScrollView {
             if (childStartPoint.x > rightOffset.x) {
                 setContentOffset(rightOffset, animated: false)
             } else {
-                setContentOffset(CGPoint(x: childStartPoint.x, y: 0.0), animated: false)
+                let barYOffset = 44.0
+                setContentOffset(CGPoint(x: childStartPoint.x, y: -barYOffset * 2), animated: false)
             }
         }
     }

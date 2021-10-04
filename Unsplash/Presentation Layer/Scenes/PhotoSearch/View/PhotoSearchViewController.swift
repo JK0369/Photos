@@ -51,15 +51,8 @@ class PhotoSearchViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        DispatchQueue.main.async { [weak self] in
-            self?.navigationItem.searchController?.searchBar.searchTextField.becomeFirstResponder()
-        }
-    }
-
     private func setupViews() {
+        tabBarController?.delegate = self
         view.backgroundColor = .black
         navigationController?.navigationBar.topItem?.title = "Photo Search"
         DispatchQueue.main.async { [weak self] in
@@ -169,5 +162,18 @@ extension PhotoSearchViewController: UISearchBarDelegate {
 
         viewModel.didTapReuturnKey(with: searchBar.text ?? "")
     }
-    
+
+}
+
+// TabBar Delegate
+
+extension PhotoSearchViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let navigationController = viewController as? UINavigationController
+        if navigationController?.viewControllers.first is Self == true {
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationItem.searchController?.searchBar.searchTextField.becomeFirstResponder()
+            }
+        }
+    }
 }

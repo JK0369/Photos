@@ -18,7 +18,7 @@ protocol PhotoDetailViewModelInout {
 }
 
 protocol PhotoDetailViewModelOutput {
-    var currentImage: Observable<([Photo], Int)> { get }
+    var images: Observable<([Photo], Int)> { get }
     var photoTitle: Observable<String> { get }
 }
 
@@ -37,13 +37,13 @@ class PhotoDetailViewModelImpl: PhotoDetailViewModel {
 
     // Output
 
-    var currentImage: Observable<([Photo], Int)> = .init(([], 0))
+    var images: Observable<([Photo], Int)> = .init(([], 0))
     var photoTitle: Observable<String> = .init("")
 
     // Input
 
     func viewDidLoad() {
-        currentImage.value = (photos, selectedIndexPath.row)
+        images.value = (photos, selectedIndexPath.row)
     }
 
     func viewWillAppear() {

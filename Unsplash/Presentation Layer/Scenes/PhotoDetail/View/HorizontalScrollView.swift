@@ -44,8 +44,9 @@ class HorizontalScrollView: BaseScrollView<HorizontalScrollModel> {
                 imageView.contentMode = .scaleAspectFit
                 let xOffset = horizontalWidth * CGFloat($0.offset)
 
-                imageView.frame = CGRect(x: xOffset, y: 0, width: horizontalWidth, height: horizontalHeight)
-                self.imageViews.append(imageView)
+                let navigationBarOffset = 44.0
+                imageView.frame = CGRect(x: xOffset, y: -navigationBarOffset, width: horizontalWidth, height: horizontalHeight - navigationBarOffset)
+                imageViews.append(imageView)
 
                 DispatchQueue.main.async { [weak self] in
                     self?.addSubview(imageView)
@@ -53,7 +54,7 @@ class HorizontalScrollView: BaseScrollView<HorizontalScrollModel> {
             }
 
         DispatchQueue.main.async { [weak self] in
-            guard let targetImageview = self?.imageViews[horizontalScrollModel.selectedIndex] else { return }
+            guard let targetImageview = self?.imageViews[horizontalScrollModel.initSelectedIndex] else { return }
             self?.scrollToView(view: targetImageview)
         }
     }

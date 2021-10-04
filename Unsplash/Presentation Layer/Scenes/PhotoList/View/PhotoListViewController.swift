@@ -22,7 +22,7 @@ class PhotoListViewController: UIViewController {
         view.delegate = self
         view.layoutMargins = .zero
         view.separatorColor = .black
-        view.backgroundColor = .black.withAlphaComponent(0.3)
+        view.backgroundColor = .black
         view.register(PhotoTableViewCell.self, forCellReuseIdentifier: PhotoTableViewCell.identifier)
 
         return view
