@@ -13,12 +13,8 @@ struct APIEndpoints {
                         path: "photos",
                         method: .get,
                         queryParameters: photoListRequestDTO,
-                        headers: ["Authorization": "Client-ID \(Constants.accessKey)"],
+                        headers: ["Authorization": "Client-ID \(AppConfiguration.accessKey)"],
                         sampleData: NetworkResponseMock.photoList)
-    }
-
-    static func getImages(with url: String) -> Endpoint<Data> {
-        return Endpoint(baseURL: url, sampleData: NetworkResponseMock.image)
     }
 
     static func getSearchingPhotos(with photoSearchRequestDTO: PhotoSearchRequestDTO) -> Endpoint<PhotoSearchResponseDTO> {
@@ -26,7 +22,11 @@ struct APIEndpoints {
                         path: "search/photos",
                         method: .get,
                         queryParameters: photoSearchRequestDTO,
-                        headers: ["Authorization": "Client-ID \(Constants.accessKey)"],
+                        headers: ["Authorization": "Client-ID \(AppConfiguration.accessKey)"],
                         sampleData: NetworkResponseMock.photoSearch)
+    }
+
+    static func getImages(with url: String) -> Endpoint<Data> {
+        return Endpoint(baseURL: url, sampleData: NetworkResponseMock.image)
     }
 }

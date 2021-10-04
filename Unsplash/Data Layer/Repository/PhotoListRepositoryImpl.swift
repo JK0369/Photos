@@ -23,7 +23,9 @@ extension PhotoListRepositoryImpl: PhotoListRepository {
             case .success(let responseDTOs):
                 var newPhotoList = [Photo]()
                 responseDTOs.forEach { photoListDTO in
-                    newPhotoList.append(photoListDTO.toDomain())
+                    if let photo = photoListDTO.toDomain() {
+                        newPhotoList.append(photo)
+                    }
                 }
                 completion(.success(newPhotoList))
             case .failure(let error):

@@ -10,8 +10,6 @@ import UIKit
 
 final class AppDIContainer {
 
-    lazy var appConfiguration = AppConfiguration()
-
     // Network
 
     lazy var provider: Provider = {
