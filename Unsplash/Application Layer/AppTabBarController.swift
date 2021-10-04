@@ -38,6 +38,7 @@ class AppTabBarController: BaseTabBarController {
 
             if viewController is PhotoListViewController {
                 viewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "photo"), tag: 0)
+                
             } else if viewController is PhotoSearchViewController {
                 viewController?.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "magnifyingglass"), tag: 1)
             }

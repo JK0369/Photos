@@ -18,13 +18,6 @@ final class AppAppearance {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
         // TabBar
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.lightGray], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-    }
-}
-
-extension UINavigationController {
-    @objc override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        UITabBar.appearance().tintColor = .white
     }
 }

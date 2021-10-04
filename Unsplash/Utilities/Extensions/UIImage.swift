@@ -8,5 +8,5 @@
 import UIKit
 
 extension UIImage {
-    static let placeholderImage: UIImage? = UIImage(systemName: "circle")
+    static let placeholderImage: UIImage? = UIImage(systemName: "circle")?.withTintColor(.black, renderingMode: .alwaysTemplate)
 }

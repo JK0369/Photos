@@ -52,6 +52,9 @@ class PhotoDetailViewModelImpl: PhotoDetailViewModel {
 
     func didUpdateScroll(to page: Int) {
         photoTitle.value = photos[page].username
-        delegate?.didUpdateScroll(to: IndexPath(row: page, section: 0))
+
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.didUpdateScroll(to: IndexPath(row: page, section: 0))
+        }
     }
 }

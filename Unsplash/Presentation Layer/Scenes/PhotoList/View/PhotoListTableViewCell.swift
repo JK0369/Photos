@@ -12,8 +12,9 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
     static let identifier = PhotoTableViewCell.className
 
     lazy var photoImageView: UIImageView = {
-        let view = UIImageView()
+        let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 10.0, height: 10.0))
         view.contentMode = .scaleToFill
+        view.backgroundColor = .black
 
         return view
     }()
@@ -56,7 +57,7 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
         photoUserNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             photoUserNameLabel.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: 12),
-            photoUserNameLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -12)
+            photoUserNameLabel.bottomAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: -12),
         ])
     }
 
