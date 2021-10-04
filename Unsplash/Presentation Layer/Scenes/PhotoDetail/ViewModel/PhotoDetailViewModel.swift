@@ -11,6 +11,10 @@ protocol PhotoDetailViewModelDelegate: AnyObject {
     func didUpdateScroll(to page: IndexPath)
 }
 
+extension PhotoDetailViewModelDelegate {
+    func didUpdateScroll(to page: IndexPath) {}
+}
+
 protocol PhotoDetailViewModelInout {
     func viewDidLoad()
     func viewWillAppear()

@@ -36,7 +36,7 @@ class PhotoListDIContainer {
 
     // DIContainers of scenes
 
-    func makePhotoDetailDIContainer(photos: [Photo], selectedIndexPath: IndexPath) -> PhotoDetailDIContainer {
+    private func makePhotoDetailDIContainer(photos: [Photo], selectedIndexPath: IndexPath) -> PhotoDetailDIContainer {
         return PhotoDetailDIContainer(dependencies: .init(photos: photos, selectedIndexPath: selectedIndexPath))
     }
 

@@ -20,16 +20,16 @@ class PhotoDetailDIContainer {
         self.dependencies = dependencies
     }
 
-    func makePhotoDetailViewController(with photoListViewModel: PhotoListViewModel?) -> PhotoDetailViewController {
-        return PhotoDetailViewController.create(with: makeDetailViewModel(with: photoListViewModel))
+    func makePhotoDetailViewController(with delegateConformableViewModel: PhotoDetailViewModelDelegate?) -> PhotoDetailViewController {
+        return PhotoDetailViewController.create(with: makeDetailViewModel(with: delegateConformableViewModel))
     }
 
     // Private
 
-    private func makeDetailViewModel(with photoListViewModel: PhotoListViewModel?) -> PhotoDetailViewModel {
+    private func makeDetailViewModel(with delegateConformableViewModel: PhotoDetailViewModelDelegate?) -> PhotoDetailViewModel {
         let photoDetailViewModel = PhotoDetailViewModelImpl(photos: dependencies.photos, selectedIndexPath: dependencies.selectedIndexPath)
-        if let photoListViewModel = photoListViewModel {
-            photoDetailViewModel.delegate = photoListViewModel
+        if let delegateConformableViewModel = delegateConformableViewModel {
+            photoDetailViewModel.delegate = delegateConformableViewModel
         }
         return photoDetailViewModel
     }

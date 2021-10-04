@@ -34,6 +34,12 @@ class PhotoSearchDIContainer {
         return PhotoSearchCoordinator(navigationConroller: navigationController, dependencies: self)
     }
 
+    // DIContainers of scenes
+
+    private func makePhotoDetailDIContainer(photos: [Photo], selectedIndexPath: IndexPath) -> PhotoDetailDIContainer {
+        return PhotoDetailDIContainer(dependencies: .init(photos: photos, selectedIndexPath: selectedIndexPath))
+    }
+
     // Private
 
     private func makePhotoSearchRepository() -> PhotoSearchRepository {
@@ -52,12 +58,8 @@ class PhotoSearchDIContainer {
 
 extension PhotoSearchDIContainer: PhotoSearchCoordinatorDependencies {
     func makePhotoDetailViewController(photos: [Photo], selectedIndexPath: IndexPath) -> UIViewController {
-        let photoDetailViewModel = PhotoDetailViewModelImpl(photos: photos, selectedIndexPath: selectedIndexPath)
-        if let photoSearchViewModel = photoSearchViewModel {
-            photoDetailViewModel.delegate = photoSearchViewModel
-        }
+        let photoDetailDIContainer = makePhotoDetailDIContainer(photos: photos, selectedIndexPath: selectedIndexPath)
 
-        let photoDetailViewController = PhotoDetailViewController.create(with: photoDetailViewModel)
-        return photoDetailViewController
+        return photoDetailDIContainer.makePhotoDetailViewController(with: photoSearchViewModel)
     }
 }
