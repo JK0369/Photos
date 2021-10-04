@@ -68,7 +68,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
 
     func didSelectItem(at indexPath: IndexPath) {
         let photos = dataSource.snapshot().itemIdentifiers
-        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage() }
+        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage }
         actions.showPhotoDetail(finishFetchPhotos, indexPath)
     }
 
@@ -121,17 +121,17 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
     private func loadImages(for photo: Photo) {
 
         imageCache.loadImage(for: photo) { [weak self] item, image in
-            guard let `self` = self else { return }
+            guard let weakSelf = self else { return }
             guard let photo = item as? Photo else { return }
             guard let image = image, image != photo.image else { return }
 
             photo.image = image
-            var snapshot = `self`.dataSource.snapshot()
+            var snapshot = weakSelf.dataSource.snapshot()
             guard snapshot.indexOfItem(photo) != nil else { return }
 
             snapshot.reloadItems([photo])
             DispatchQueue.global(qos: .background).async {
-                `self`.dataSource.apply(snapshot, animatingDifferences: false)
+                weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
             }
         }
     }

@@ -29,11 +29,11 @@ class ProviderImpl: Provider {
 
             session.dataTask(with: urlRequest) { [weak self] data, response, error in
                 self?.checkError(with: data, response, error) { result in
-                    guard let `self` = self else { return }
+                    guard let weakSelf = self else { return }
 
                     switch result {
                     case .success(let data):
-                        completion(`self`.decode(data: data))
+                        completion(weakSelf.decode(data: data))
                     case .failure(let error):
                         completion(.failure(error))
                     }
