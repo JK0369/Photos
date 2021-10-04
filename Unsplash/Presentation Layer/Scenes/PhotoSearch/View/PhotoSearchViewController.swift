@@ -51,9 +51,20 @@ class PhotoSearchViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationItem.searchController?.searchBar.searchTextField.becomeFirstResponder()
+        }
+    }
+
     private func setupViews() {
         view.backgroundColor = .black
         navigationController?.navigationBar.topItem?.title = "Photo Search"
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationItem.searchController?.searchBar.searchTextField.textColor = .white
+        }
     }
 
     private func addSubviews() {

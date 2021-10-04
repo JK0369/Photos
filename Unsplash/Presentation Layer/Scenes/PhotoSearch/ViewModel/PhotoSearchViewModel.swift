@@ -54,7 +54,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
     // Input
 
     func scrollViewDidScroll() {
-        loadData()
+        loadData(with: lastQuery)
     }
 
     func didUpdateCell(for photo: Photo) {
@@ -77,23 +77,21 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
 
     // Private
 
-    private func loadData(with query: String = "") {
+    private func loadData(with query: String) {
         guard viewState == .idle else { return }
-        키워드로 다시 검색
-        guard lastQuery != query else {
-            // 다른 키워드로 다시 검색한 경우
+
+        if !lastQuery.isEmpty, lastQuery != query {
+            // 다른 키워드로 재검색
+
             currentPage = 0
-            var snapshot = dataSource.snapshot()
-            snapshot.deleteAllItems()
+            let snapshot =  NSDiffableDataSourceSnapshot<Section, Photo>.init()
             dataSource.apply(snapshot)
             lastQuery = ""
-            return
         }
+
+        currentPage += 1
         lastQuery = query
 
-        print(query)
-
-        // TODO: API
         viewState = .isLoading
         photoSearchUseCase.execute(requestVal: PhotoSearchRequestValue(query: query, page: currentPage)) { [weak self] result in
             self?.viewState = .idle
