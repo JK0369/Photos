@@ -12,7 +12,7 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
     static let identifier = PhotoTableViewCell.className
 
     lazy var photoImageView: UIImageView = {
-        let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 10.0, height: 10.0))
+        let view = UIImageView()
         view.contentMode = .scaleToFill
         view.backgroundColor = .black
 

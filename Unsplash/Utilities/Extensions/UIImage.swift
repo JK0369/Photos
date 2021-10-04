@@ -8,5 +8,10 @@
 import UIKit
 
 extension UIImage {
-    static let placeholderImage: UIImage? = UIImage(systemName: "circle")?.withTintColor(.black, renderingMode: .alwaysTemplate)
+    static func placeholderImage(with size: CGSize = CGSize(width: 10.0, height: 10.0)) -> UIImage? {
+        UIGraphicsBeginImageContext(size)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
