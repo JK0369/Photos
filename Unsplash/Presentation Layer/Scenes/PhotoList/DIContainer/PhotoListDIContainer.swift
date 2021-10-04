@@ -34,6 +34,12 @@ class PhotoListDIContainer {
         return PhotoListCoordinator(navigationConroller: navigationController, dependencies: self)
     }
 
+    // DIContainers of scenes
+
+    func makePhotoDetailDIContainer(photos: [Photo], selectedIndexPath: IndexPath) -> PhotoDetailDIContainer {
+        return PhotoDetailDIContainer(dependencies: .init(photos: photos, selectedIndexPath: selectedIndexPath))
+    }
+
     // Private
 
     private func makePhotoListRepository() -> PhotoListRepository {
@@ -52,12 +58,9 @@ class PhotoListDIContainer {
 
 extension PhotoListDIContainer: PhotoListCoordinatorDependencies {
     func makePhotoDetailViewController(photos: [Photo], selectedIndexPath: IndexPath) -> UIViewController {
-        let photoDetailViewModel = PhotoDetailViewModelImpl(photos: photos, selectedIndexPath: selectedIndexPath)
-        if let photoListViewModel = photoListViewModel {
-            photoDetailViewModel.delegate = photoListViewModel
-        }
+        let photoDetailDIContainer = makePhotoDetailDIContainer(photos: photos, selectedIndexPath: selectedIndexPath)
 
-        let photoDetailViewController = PhotoDetailViewController.create(with: photoDetailViewModel)
-        return photoDetailViewController
+        // photoListViewModel 주입 이유: `photoDetailViewModel.delegate = photoListViewModel` 하기위해 주입
+        return photoDetailDIContainer.makePhotoDetailViewController(with: photoListViewModel)
     }
 }

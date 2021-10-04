@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 class PhotoDetailDIContainer {
     struct Dependencies {
-
+        let photos: [Photo]
+        let selectedIndexPath: IndexPath
     }
 
     private let dependencies: Dependencies
@@ -18,4 +20,17 @@ class PhotoDetailDIContainer {
         self.dependencies = dependencies
     }
 
+    func makePhotoDetailViewController(with photoListViewModel: PhotoListViewModel?) -> PhotoDetailViewController {
+        return PhotoDetailViewController.create(with: makeDetailViewModel(with: photoListViewModel))
+    }
+
+    // Private
+
+    private func makeDetailViewModel(with photoListViewModel: PhotoListViewModel?) -> PhotoDetailViewModel {
+        let photoDetailViewModel = PhotoDetailViewModelImpl(photos: dependencies.photos, selectedIndexPath: dependencies.selectedIndexPath)
+        if let photoListViewModel = photoListViewModel {
+            photoDetailViewModel.delegate = photoListViewModel
+        }
+        return photoDetailViewModel
+    }
 }
