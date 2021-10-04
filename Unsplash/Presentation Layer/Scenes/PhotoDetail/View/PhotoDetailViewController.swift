@@ -51,7 +51,7 @@ class PhotoDetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        viewModel.didUpdateScroll(to: currentPage)
+        viewModel.viewWillDisappear(with: currentPage)
     }
 
     private func setupViews() {
@@ -92,5 +92,7 @@ extension PhotoDetailViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = Int(scrollView.contentOffset.x / scrollView.frame.maxX)
         self.currentPage = currentPage
+
+        viewModel.didUpdateScroll(to: currentPage)
     }
 }

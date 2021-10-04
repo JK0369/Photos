@@ -14,6 +14,7 @@ protocol PhotoDetailViewModelDelegate: AnyObject {
 protocol PhotoDetailViewModelInout {
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear(with currentPage: Int)
     func didUpdateScroll(to page: Int)
 }
 
@@ -50,11 +51,13 @@ class PhotoDetailViewModelImpl: PhotoDetailViewModel {
         photoTitle.value = photos[selectedIndexPath.row].username
     }
 
+    func viewWillDisappear(with currentPage: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.didUpdateScroll(to: IndexPath(row: currentPage, section: 0))
+        }
+    }
+
     func didUpdateScroll(to page: Int) {
         photoTitle.value = photos[page].username
-
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.didUpdateScroll(to: IndexPath(row: page, section: 0))
-        }
     }
 }
