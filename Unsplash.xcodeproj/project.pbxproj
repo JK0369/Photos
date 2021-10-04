@@ -64,7 +64,21 @@
 		E07FA61D27084F7C004B7E3D /* PhotoListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61827084F7C004B7E3D /* PhotoListResponseDTO.swift */; };
 		E07FA6202708501A004B7E3D /* PhotoListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA61F2708501A004B7E3D /* PhotoListUseCase.swift */; };
 		E07FA62527085125004B7E3D /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FA62427085125004B7E3D /* APIEndpoints.swift */; };
+		E0C0635E270AE06900A93C19 /* PhotoListAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0635D270AE06900A93C19 /* PhotoListAPITests.swift */; };
+		E0C06360270AE08C00A93C19 /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0635F270AE08C00A93C19 /* URLSessionDataTaskMock.swift */; };
+		E0C06362270AE09100A93C19 /* PhotoListURLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C06361270AE09100A93C19 /* PhotoListURLSessionMock.swift */; };
+		E0C0636D270AE79C00A93C19 /* PhotoUrlAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0636C270AE79C00A93C19 /* PhotoUrlAPITests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E0C06353270ADF8A00A93C19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E06BB94927047F5700F2DFE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E06BB95027047F5700F2DFE6;
+			remoteInfo = Unsplash;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepository.swift; sourceTree = "<group>"; };
@@ -126,10 +140,22 @@
 		E07FA61827084F7C004B7E3D /* PhotoListResponseDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListResponseDTO.swift; sourceTree = "<group>"; };
 		E07FA61F2708501A004B7E3D /* PhotoListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListUseCase.swift; sourceTree = "<group>"; };
 		E07FA62427085125004B7E3D /* APIEndpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		E0C0634F270ADF8A00A93C19 /* UnsplashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0C0635D270AE06900A93C19 /* PhotoListAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListAPITests.swift; sourceTree = "<group>"; };
+		E0C0635F270AE08C00A93C19 /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
+		E0C06361270AE09100A93C19 /* PhotoListURLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListURLSessionMock.swift; sourceTree = "<group>"; };
+		E0C0636C270AE79C00A93C19 /* PhotoUrlAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrlAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E06BB94E27047F5700F2DFE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0C0634C270ADF8A00A93C19 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -195,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				E06BB95327047F5700F2DFE6 /* Unsplash */,
+				E0C06350270ADF8A00A93C19 /* UnsplashTests */,
 				E06BB95227047F5700F2DFE6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -203,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				E06BB95127047F5700F2DFE6 /* Unsplash.app */,
+				E0C0634F270ADF8A00A93C19 /* UnsplashTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -540,6 +568,49 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		E0C06350270ADF8A00A93C19 /* UnsplashTests */ = {
+			isa = PBXGroup;
+			children = (
+				E0C06359270ADF9600A93C19 /* UseCase */,
+				E0C06358270ADF8E00A93C19 /* Network */,
+			);
+			path = UnsplashTests;
+			sourceTree = "<group>";
+		};
+		E0C06358270ADF8E00A93C19 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E0C06367270AE54500A93C19 /* PhotoListAPI */,
+				E0C0635A270ADF9F00A93C19 /* Mocks */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E0C06359270ADF9600A93C19 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		E0C0635A270ADF9F00A93C19 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E0C0635F270AE08C00A93C19 /* URLSessionDataTaskMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		E0C06367270AE54500A93C19 /* PhotoListAPI */ = {
+			isa = PBXGroup;
+			children = (
+				E0C0635D270AE06900A93C19 /* PhotoListAPITests.swift */,
+				E0C0636C270AE79C00A93C19 /* PhotoUrlAPITests.swift */,
+				E0C06361270AE09100A93C19 /* PhotoListURLSessionMock.swift */,
+			);
+			path = PhotoListAPI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -560,6 +631,24 @@
 			productReference = E06BB95127047F5700F2DFE6 /* Unsplash.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E0C0634E270ADF8A00A93C19 /* UnsplashTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E0C06357270ADF8A00A93C19 /* Build configuration list for PBXNativeTarget "UnsplashTests" */;
+			buildPhases = (
+				E0C0634B270ADF8A00A93C19 /* Sources */,
+				E0C0634C270ADF8A00A93C19 /* Frameworks */,
+				E0C0634D270ADF8A00A93C19 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E0C06354270ADF8A00A93C19 /* PBXTargetDependency */,
+			);
+			name = UnsplashTests;
+			productName = UnsplashTests;
+			productReference = E0C0634F270ADF8A00A93C19 /* UnsplashTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -572,6 +661,11 @@
 				TargetAttributes = {
 					E06BB95027047F5700F2DFE6 = {
 						CreatedOnToolsVersion = 13.0;
+					};
+					E0C0634E270ADF8A00A93C19 = {
+						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1300;
+						TestTargetID = E06BB95027047F5700F2DFE6;
 					};
 				};
 			};
@@ -589,6 +683,7 @@
 			projectRoot = "";
 			targets = (
 				E06BB95027047F5700F2DFE6 /* Unsplash */,
+				E0C0634E270ADF8A00A93C19 /* UnsplashTests */,
 			);
 		};
 /* End PBXProject section */
@@ -600,6 +695,13 @@
 			files = (
 				E06BB96127047F5800F2DFE6 /* LaunchScreen.storyboard in Resources */,
 				E06BB95E27047F5800F2DFE6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0C0634D270ADF8A00A93C19 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,7 +770,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E0C0634B270ADF8A00A93C19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0C06362270AE09100A93C19 /* PhotoListURLSessionMock.swift in Sources */,
+				E0C0636D270AE79C00A93C19 /* PhotoUrlAPITests.swift in Sources */,
+				E0C0635E270AE06900A93C19 /* PhotoListAPITests.swift in Sources */,
+				E0C06360270AE08C00A93C19 /* URLSessionDataTaskMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E0C06354270ADF8A00A93C19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E06BB95027047F5700F2DFE6 /* Unsplash */;
+			targetProxy = E0C06353270ADF8A00A93C19 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E06BB95F27047F5800F2DFE6 /* LaunchScreen.storyboard */ = {
@@ -854,6 +975,57 @@
 			};
 			name = Release;
 		};
+		E0C06355270ADF8A00A93C19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SS7U83UJNK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jake.UnsplashTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unsplash.app/Unsplash";
+			};
+			name = Debug;
+		};
+		E0C06356270ADF8A00A93C19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SS7U83UJNK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jake.UnsplashTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unsplash.app/Unsplash";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -871,6 +1043,15 @@
 			buildConfigurations = (
 				E06BB96627047F5800F2DFE6 /* Debug */,
 				E06BB96727047F5800F2DFE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E0C06357270ADF8A00A93C19 /* Build configuration list for PBXNativeTarget "UnsplashTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0C06355270ADF8A00A93C19 /* Debug */,
+				E0C06356270ADF8A00A93C19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
