@@ -257,13 +257,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		E059E4D62709F3AD00B0FB70 /* PhotoSearch */ = {
+		E059E4D62709F3AD00B0FB70 /* PhotoSearchDTO */ = {
 			isa = PBXGroup;
 			children = (
 				E059E4D72709F3BF00B0FB70 /* PhotoSearchRequestDTO.swift */,
 				E059E4D92709F3C600B0FB70 /* PhotoSearchResponseDTO.swift */,
 			);
-			path = PhotoSearch;
+			path = PhotoSearchDTO;
 			sourceTree = "<group>";
 		};
 		E059E4DB2709F58C00B0FB70 /* Views */ = {
@@ -565,7 +565,6 @@
 		E07FA60F27084F7C004B7E3D /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
-				E07FA62327085125004B7E3D /* Network */,
 				E07FA61E2708500B004B7E3D /* UseCase */,
 				E07FA61027084F7C004B7E3D /* Entity */,
 				E04C3E0927087D3400393FD9 /* Interface */,
@@ -584,20 +583,21 @@
 		E07FA61227084F7C004B7E3D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E07FA62427085125004B7E3D /* APIEndpoints.swift */,
 				E07FA61427084F7C004B7E3D /* NetworkResponseMock.swift */,
-				E07FA61527084F7C004B7E3D /* PhotoList */,
-				E059E4D62709F3AD00B0FB70 /* PhotoSearch */,
+				E07FA61527084F7C004B7E3D /* PhotoListDTO */,
+				E059E4D62709F3AD00B0FB70 /* PhotoSearchDTO */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		E07FA61527084F7C004B7E3D /* PhotoList */ = {
+		E07FA61527084F7C004B7E3D /* PhotoListDTO */ = {
 			isa = PBXGroup;
 			children = (
 				E07FA61727084F7C004B7E3D /* PhotoListRequestDTO.swift */,
 				E07FA61827084F7C004B7E3D /* PhotoListResponseDTO.swift */,
 			);
-			path = PhotoList;
+			path = PhotoListDTO;
 			sourceTree = "<group>";
 		};
 		E07FA61E2708500B004B7E3D /* UseCase */ = {
@@ -618,32 +618,24 @@
 			path = "Data Layer";
 			sourceTree = "<group>";
 		};
-		E07FA62327085125004B7E3D /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				E07FA62427085125004B7E3D /* APIEndpoints.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		E0C06350270ADF8A00A93C19 /* UnsplashTests */ = {
 			isa = PBXGroup;
 			children = (
-				E0C06358270ADF8E00A93C19 /* Network */,
+				E0C06358270ADF8E00A93C19 /* Data Layer */,
 				E00531F2270AFF7700740CB9 /* Domain Layer */,
 				E00531F3270AFF8100740CB9 /* Presentstion Layer */,
 			);
 			path = UnsplashTests;
 			sourceTree = "<group>";
 		};
-		E0C06358270ADF8E00A93C19 /* Network */ = {
+		E0C06358270ADF8E00A93C19 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
 				E0C0635A270ADF9F00A93C19 /* CommonMock */,
 				E0C06367270AE54500A93C19 /* PhotoListAPI */,
 				E00531E4270AFC9900740CB9 /* PhotoSearchAPI */,
 			);
-			path = Network;
+			path = "Data Layer";
 			sourceTree = "<group>";
 		};
 		E0C0635A270ADF9F00A93C19 /* CommonMock */ = {
@@ -657,9 +649,9 @@
 		E0C06367270AE54500A93C19 /* PhotoListAPI */ = {
 			isa = PBXGroup;
 			children = (
+				E0C06361270AE09100A93C19 /* PhotoListURLSessionMock.swift */,
 				E0C0635D270AE06900A93C19 /* PhotoListAPITests.swift */,
 				E0C0636C270AE79C00A93C19 /* PhotoUrlAPITests.swift */,
-				E0C06361270AE09100A93C19 /* PhotoListURLSessionMock.swift */,
 			);
 			path = PhotoListAPI;
 			sourceTree = "<group>";
