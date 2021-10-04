@@ -64,6 +64,7 @@ class PhotoTableViewCell: BaseTableViewCell<Photo> {
     override func bind(_ model: Photo) {
         super.bind(model)
 
+        photoUserNameLabel.isHidden = model.image == .placeholderImage ? true : false
         photoImageView.image = model.image
         photoUserNameLabel.text = model.username
     }
