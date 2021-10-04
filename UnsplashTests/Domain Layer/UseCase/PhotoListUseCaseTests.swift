@@ -39,7 +39,7 @@ class PhotoListUseCaseTests: XCTestCase {
                 // then
                 XCTAssertEqual(expectationPhotosFirstImageUrl, photos.first?.imageUrl)
                 expectation.fulfill()
-                
+
             case .failure:
                 XCTFail()
             }
