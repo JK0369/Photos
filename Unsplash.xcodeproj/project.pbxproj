@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E00531E8270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531E7270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift */; };
 		E00531EA270AFE0000740CB9 /* PhotoSearchAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531E9270AFE0000740CB9 /* PhotoSearchAPITests.swift */; };
+		E00531F1270AFEE000740CB9 /* PhotoListUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531F0270AFEE000740CB9 /* PhotoListUseCaseTests.swift */; };
+		E00531F7270B049200740CB9 /* PhotoSearchUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531F6270B049200740CB9 /* PhotoSearchUseCaseTests.swift */; };
 		E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */; };
 		E04C3E0F27087DE400393FD9 /* PhotoListRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */; };
 		E04C3E312708B43500393FD9 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E302708B43500393FD9 /* AppAppearance.swift */; };
@@ -85,6 +87,8 @@
 /* Begin PBXFileReference section */
 		E00531E7270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchURLSessionMock.swift; sourceTree = "<group>"; };
 		E00531E9270AFE0000740CB9 /* PhotoSearchAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchAPITests.swift; sourceTree = "<group>"; };
+		E00531F0270AFEE000740CB9 /* PhotoListUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListUseCaseTests.swift; sourceTree = "<group>"; };
+		E00531F6270B049200740CB9 /* PhotoSearchUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchUseCaseTests.swift; sourceTree = "<group>"; };
 		E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepository.swift; sourceTree = "<group>"; };
 		E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepositoryImpl.swift; sourceTree = "<group>"; };
 		E04C3E302708B43500393FD9 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
@@ -176,6 +180,30 @@
 				E00531E9270AFE0000740CB9 /* PhotoSearchAPITests.swift */,
 			);
 			path = PhotoSearchAPI;
+			sourceTree = "<group>";
+		};
+		E00531ED270AFEBB00740CB9 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				E00531F0270AFEE000740CB9 /* PhotoListUseCaseTests.swift */,
+				E00531F6270B049200740CB9 /* PhotoSearchUseCaseTests.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		E00531F2270AFF7700740CB9 /* Domain Layer */ = {
+			isa = PBXGroup;
+			children = (
+				E00531ED270AFEBB00740CB9 /* UseCase */,
+			);
+			path = "Domain Layer";
+			sourceTree = "<group>";
+		};
+		E00531F3270AFF8100740CB9 /* Presentstion Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Presentstion Layer";
 			sourceTree = "<group>";
 		};
 		E04C3E0927087D3400393FD9 /* Interface */ = {
@@ -584,8 +612,9 @@
 		E0C06350270ADF8A00A93C19 /* UnsplashTests */ = {
 			isa = PBXGroup;
 			children = (
-				E0C06359270ADF9600A93C19 /* UseCase */,
 				E0C06358270ADF8E00A93C19 /* Network */,
+				E00531F2270AFF7700740CB9 /* Domain Layer */,
+				E00531F3270AFF8100740CB9 /* Presentstion Layer */,
 			);
 			path = UnsplashTests;
 			sourceTree = "<group>";
@@ -598,13 +627,6 @@
 				E00531E4270AFC9900740CB9 /* PhotoSearchAPI */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		E0C06359270ADF9600A93C19 /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseCase;
 			sourceTree = "<group>";
 		};
 		E0C0635A270ADF9F00A93C19 /* CommonMock */ = {
@@ -792,8 +814,10 @@
 				E0C0636D270AE79C00A93C19 /* PhotoUrlAPITests.swift in Sources */,
 				E0C0635E270AE06900A93C19 /* PhotoListAPITests.swift in Sources */,
 				E00531EA270AFE0000740CB9 /* PhotoSearchAPITests.swift in Sources */,
+				E00531F7270B049200740CB9 /* PhotoSearchUseCaseTests.swift in Sources */,
 				E00531E8270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift in Sources */,
 				E0C06360270AE08C00A93C19 /* URLSessionDataTaskMock.swift in Sources */,
+				E00531F1270AFEE000740CB9 /* PhotoListUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
