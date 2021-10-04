@@ -11,10 +11,7 @@ import XCTest
 class PhotoListViewModelTests: XCTestCase {
     static let photos: [Photo] = {
         let photo1 = Photo(image: .placeholderImage, imageUrl: URL(string: "https://test-1.com/")!, username: "username1")
-        let photo2 = Photo(image: .placeholderImage, imageUrl: URL(string: "https://test-2.com/")!, username: "username2")
-        let photo3 = Photo(image: .placeholderImage, imageUrl: URL(string: "https://test-3.com/")!, username: "username3")
-        let photo4 = Photo(image: .placeholderImage, imageUrl: URL(string: "https://test-4.com/")!, username: "username4")
-        return [photo1, photo2, photo3, photo4]
+        return [photo1]
     }()
 
     struct PhotoListUseCaseMock: PhotoListUseCase {
