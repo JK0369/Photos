@@ -7,24 +7,24 @@
 
 import Foundation
 
-final class Observable<Value> {
+final class Observable<V> {
 
-    struct Observer<Value> {
+    struct Observer<V> {
         weak var observer: AnyObject?
-        let block: (Value) -> Void
+        let block: (V) -> Void
     }
 
-    private var observers = [Observer<Value>]()
+    private var observers = [Observer<V>]()
 
-    public var value: Value {
+    public var value: V {
         didSet { notifyObservers() }
     }
 
-    public init(_ value: Value) {
+    public init(_ value: V) {
         self.value = value
     }
 
-    public func observe(on observer: AnyObject, observerBlock: @escaping (Value) -> Void) {
+    public func observe(on observer: AnyObject, observerBlock: @escaping (V) -> Void) {
         observers.append(Observer(observer: observer, block: observerBlock))
     }
 
