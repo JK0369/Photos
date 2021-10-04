@@ -15,7 +15,7 @@ enum OrderBy: String, Encodable {
 
 struct PhotoListRequestDTO: Encodable {
     let page: Int
-    var perPage: Int = 10
+    var perPage: Int = 15
     var orderBy: OrderBy = .latest
 
     enum CodingKeys: String, CodingKey {
