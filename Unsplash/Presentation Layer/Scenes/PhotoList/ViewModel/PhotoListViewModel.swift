@@ -90,7 +90,7 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
                     snapshot.appendSections([.main])
                 }
                 snapshot.appendItems(newPhotos)
-                DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
                     weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
                 }
 
@@ -112,7 +112,7 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
             guard snapshot.indexOfItem(photo) != nil else { return }
 
             snapshot.reloadItems([photo])
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
             }
         }

@@ -108,7 +108,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
                     snapshot.appendSections([.main])
                 }
                 snapshot.appendItems(photos)
-                DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
                     weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
                 }
 
@@ -130,7 +130,7 @@ final class PhotoSearchViewModelImpl: PhotoSearchViewModel {
             guard snapshot.indexOfItem(photo) != nil else { return }
 
             snapshot.reloadItems([photo])
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
                 weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
             }
         }
