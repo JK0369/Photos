@@ -25,6 +25,7 @@ class PhotoDetailViewController: UIViewController {
         return viewController
     }
 
+    private var currentPage = 0
     private var viewModel: PhotoDetailViewModel!
 
     private lazy var horizontalScrollView: HorizontalScrollView = {
@@ -45,6 +46,12 @@ class PhotoDetailViewController: UIViewController {
         super.viewWillAppear(animated)
 
         viewModel.viewWillAppear()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        viewModel.didUpdateScroll(to: currentPage)
     }
 
     private func setupViews() {
@@ -84,6 +91,6 @@ class PhotoDetailViewController: UIViewController {
 extension PhotoDetailViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentPage = Int(scrollView.contentOffset.x / scrollView.frame.maxX)
-        viewModel.didUpdateScroll(to: currentPage)
+        self.currentPage = currentPage
     }
 }
