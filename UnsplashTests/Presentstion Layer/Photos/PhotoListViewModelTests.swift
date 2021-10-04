@@ -18,10 +18,8 @@ class PhotoListViewModelTests: XCTestCase {
     }()
 
     struct PhotoListUseCaseMock: PhotoListUseCase {
-        var expectation: XCTestExpectation?
         func execute(requestVal: PhotoListRequestValue, completion: @escaping (Result<[Photo], Error>) -> Void) {
             completion(.success(PhotoListViewModelTests.photos))
-            expectation?.fulfill()
         }
     }
 
@@ -36,20 +34,25 @@ class PhotoListViewModelTests: XCTestCase {
 
     static func showPhotoDetailMock(_ photos: [Photo], _ indexPath: IndexPath) {}
 
-    func test_whenPhotoListUseCaseRetrievesFirstPage_thenViewModelAddingCurrentPage() {
+    func test_whenPhotoListUseCaseRetrievesTwoPage_thenViewModelAddingCurrentPageTwo() {
         // given
-        var photoListUseCaseMock = PhotoListUseCaseMock()
-        photoListUseCaseMock.expectation = expectation(description: "retrieve first page")
+        let photoListUseCaseMock = PhotoListUseCaseMock()
+        let expectation = expectation(description: "add current page")
         let imageCacheMock = ImageCacheMock()
         let photoListViewModelActionsMock = PhotoListViewModelActions(showPhotoDetail: PhotoListViewModelTests.showPhotoDetailMock)
         let viewModel = PhotoListViewModelImpl(photoListUseCase: photoListUseCaseMock,
                                                imageCache: imageCacheMock,
                                                actions: photoListViewModelActionsMock)
+        let tableViewMock = UITableView()
 
-        // when (view input)
-        viewModel.didSetupDiffableDataSource()
+        // when (input)
+        viewModel.viewDidLoad(with: tableViewMock)
+        viewModel.scrollViewDidScroll()
 
-        // then
-        viewModel.dataSource
+        // then (output)
+        XCTAssertTrue(viewModel.currentPage == 2)
+        expectation.fulfill()
+
+        waitForExpectations(timeout: 3, handler: nil)
     }
 }
