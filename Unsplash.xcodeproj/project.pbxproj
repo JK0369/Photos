@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E00531E8270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531E7270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift */; };
+		E00531EA270AFE0000740CB9 /* PhotoSearchAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00531E9270AFE0000740CB9 /* PhotoSearchAPITests.swift */; };
 		E04C3E0C27087D5B00393FD9 /* PhotoListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */; };
 		E04C3E0F27087DE400393FD9 /* PhotoListRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */; };
 		E04C3E312708B43500393FD9 /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C3E302708B43500393FD9 /* AppAppearance.swift */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E00531E7270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchURLSessionMock.swift; sourceTree = "<group>"; };
+		E00531E9270AFE0000740CB9 /* PhotoSearchAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchAPITests.swift; sourceTree = "<group>"; };
 		E04C3E0B27087D5B00393FD9 /* PhotoListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepository.swift; sourceTree = "<group>"; };
 		E04C3E0E27087DE400393FD9 /* PhotoListRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListRepositoryImpl.swift; sourceTree = "<group>"; };
 		E04C3E302708B43500393FD9 /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
@@ -165,6 +169,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E00531E4270AFC9900740CB9 /* PhotoSearchAPI */ = {
+			isa = PBXGroup;
+			children = (
+				E00531E7270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift */,
+				E00531E9270AFE0000740CB9 /* PhotoSearchAPITests.swift */,
+			);
+			path = PhotoSearchAPI;
+			sourceTree = "<group>";
+		};
 		E04C3E0927087D3400393FD9 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,8 +593,9 @@
 		E0C06358270ADF8E00A93C19 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E0C0635A270ADF9F00A93C19 /* CommonMock */,
 				E0C06367270AE54500A93C19 /* PhotoListAPI */,
-				E0C0635A270ADF9F00A93C19 /* Mocks */,
+				E00531E4270AFC9900740CB9 /* PhotoSearchAPI */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -593,12 +607,12 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		E0C0635A270ADF9F00A93C19 /* Mocks */ = {
+		E0C0635A270ADF9F00A93C19 /* CommonMock */ = {
 			isa = PBXGroup;
 			children = (
 				E0C0635F270AE08C00A93C19 /* URLSessionDataTaskMock.swift */,
 			);
-			path = Mocks;
+			path = CommonMock;
 			sourceTree = "<group>";
 		};
 		E0C06367270AE54500A93C19 /* PhotoListAPI */ = {
@@ -777,6 +791,8 @@
 				E0C06362270AE09100A93C19 /* PhotoListURLSessionMock.swift in Sources */,
 				E0C0636D270AE79C00A93C19 /* PhotoUrlAPITests.swift in Sources */,
 				E0C0635E270AE06900A93C19 /* PhotoListAPITests.swift in Sources */,
+				E00531EA270AFE0000740CB9 /* PhotoSearchAPITests.swift in Sources */,
+				E00531E8270AFD4A00740CB9 /* PhotoSearchURLSessionMock.swift in Sources */,
 				E0C06360270AE08C00A93C19 /* URLSessionDataTaskMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
