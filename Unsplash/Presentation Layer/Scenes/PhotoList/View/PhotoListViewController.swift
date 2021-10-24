@@ -29,15 +29,17 @@ class PhotoListViewController: UIViewController {
     }()
 
     private var viewModel: PhotoListViewModel!
+    private var dataSource: UITableViewDiffableDataSource<Section, Photo>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupViews()
+        setupTableViewDiffableDataSource()
         addSubviews()
         makeConstraints()
         bindOutput()
-        viewModel.viewDidLoad(with: tableView)
+        viewModel.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +51,16 @@ class PhotoListViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .black
         navigationController?.navigationBar.topItem?.title = "Unsplash"
+    }
+
+    private func setupTableViewDiffableDataSource() {
+        dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
+            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
+            (cell as? PhotoTableViewCell)?.model = photo
+            self?.viewModel.didUpdateCell(with: photo)
+
+            return cell
+        })
     }
 
     private func addSubviews() {
@@ -67,12 +79,40 @@ class PhotoListViewController: UIViewController {
     }
 
     private func bindOutput() {
-        viewModel.scrollPageFromDetailPhoto.observe(on: self) { [weak self] in self?.updateScroll(to: $0) }
+        viewModel.photoDatas.observe(on: self) { [weak self] in self?.setupPhotoDatas($0) }
+        viewModel.photoImage.observe(on: self) { [weak self] in self?.setupPhoto($0) }
+        viewModel.didUpdateScroll.observe(on: self) { [weak self] in self?.scrollPageFromDetailPhoto($0) }
+    }
+
+    private func scrollPageFromDetailPhoto(_ page: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        if page.row < snapshot.numberOfItems, page.section < snapshot.numberOfSections, dataSource.snapshot().numberOfItems != 0 {
+            updateScroll(to: page)
+        }
     }
 
     private func updateScroll(to page: IndexPath) {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.scrollToRow(at: page, at: .bottom, animated: false)
+        }
+    }
+
+    private func setupPhotoDatas(_ photos: [Photo]) {
+        var snapshot = dataSource.snapshot()
+        if snapshot.sectionIdentifiers.isEmpty { snapshot.appendSections([.main]) }
+        snapshot.appendItems(photos)
+        DispatchQueue.main.async { [weak self] in
+            self?.dataSource.apply(snapshot, animatingDifferences: false)
+        }
+    }
+
+    private func setupPhoto(_ photo: Photo?) {
+        guard let photo = photo else { return }
+        var snapshot = dataSource.snapshot()
+        guard snapshot.indexOfItem(photo) != nil else { return }
+        snapshot.reloadItems([photo])
+        DispatchQueue.main.async { [weak self] in
+            self?.dataSource.apply(snapshot, animatingDifferences: false)
         }
     }
 }
@@ -90,12 +130,17 @@ extension PhotoListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectRow(at: indexPath)
+        let photos = dataSource.snapshot().itemIdentifiers
+        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage }
+        viewModel.didSelect(photos: finishFetchPhotos, indexPath: indexPath)
     }
 }
 
 extension PhotoListViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach { viewModel.prefetchRow(at: $0) }
+        for indexPath in indexPaths {
+            guard let photo = dataSource.itemIdentifier(for: indexPath) else { continue }
+            viewModel.didDetectPrefetch(photo: photo)
+        }
     }
 }

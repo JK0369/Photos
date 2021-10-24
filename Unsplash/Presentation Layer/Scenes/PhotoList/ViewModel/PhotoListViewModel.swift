@@ -6,21 +6,23 @@
 //
 
 import Foundation
-import UIKit
 
 struct PhotoListViewModelActions {
     let showPhotoDetail: (_ photos: [Photo], _ selectedIndexPath: IndexPath) -> Void
 }
 
 protocol PhotoListViewModelInout {
-    func viewDidLoad(with tableView: UITableView)
+    func viewDidLoad()
+    func didUpdateCell(with photo: Photo)
+    func didSelect(photos: [Photo], indexPath: IndexPath)
     func scrollViewDidScroll()
-    func prefetchRow(at indexPath: IndexPath)
-    func didSelectRow(at indexPath: IndexPath)
+    func didDetectPrefetch(photo: Photo)
 }
 
 protocol PhotoListViewModelOutput {
-    var scrollPageFromDetailPhoto: Observable<IndexPath> { get }
+    var photoDatas: Observable<[Photo]> { get }
+    var photoImage: Observable<Photo?> { get }
+    var didUpdateScroll: Observable<IndexPath> { get }
 }
 
 protocol PhotoListViewModel: PhotoListViewModelInout, PhotoListViewModelOutput, PhotoDetailViewModelDelegate {}
@@ -38,45 +40,37 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
     }
 
     var currentPage: Int = 0
-    private var dataSource: UITableViewDiffableDataSource<Section, Photo>!
     private var viewState = ViewState.idle
 
     // Output
 
-    var scrollPageFromDetailPhoto: Observable<IndexPath> = .init(IndexPath(row: 0, section: 0))
+    var photoDatas: Observable<[Photo]> = .init([])
+    var photoImage: Observable<Photo?> = .init(nil)
+    var didUpdateScroll: Observable<IndexPath> = .init(IndexPath(row: 0, section: 0))
 
     // Input
 
-    func viewDidLoad(with tableView: UITableView) {
-        setupTableViewDiffableDataSource(with: tableView)
+    func viewDidLoad() {
         loadData()
+    }
+
+    func didUpdateCell(with photo: Photo) {
+        loadImages(for: photo)
     }
 
     func scrollViewDidScroll() {
         loadData()
     }
 
-    func prefetchRow(at indexPath: IndexPath) {
-        prefetchImage(at: indexPath)
+    func didSelect(photos: [Photo], indexPath: IndexPath) {
+        actions.showPhotoDetail(photos, indexPath)
     }
 
-    func didSelectRow(at indexPath: IndexPath) {
-        let photos = dataSource.snapshot().itemIdentifiers
-        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage }
-        actions.showPhotoDetail(finishFetchPhotos, indexPath)
+    func didDetectPrefetch(photo: Photo) {
+        prefetchImage(photo: photo)
     }
 
     // Private
-
-    private func setupTableViewDiffableDataSource(with tableView: UITableView) {
-        dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, photo in
-            let cell = tableView.dequeueReusableCell(withIdentifier: PhotoTableViewCell.identifier, for: indexPath)
-            (cell as? PhotoTableViewCell)?.model = photo
-            self?.didUpdateCell(for: photo)
-
-            return cell
-        })
-    }
 
     private func didUpdateCell(for photo: Photo) {
         loadImages(for: photo)
@@ -89,19 +83,10 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
         viewState = .isLoading
         photoListUseCase.execute(requestVal: PhotoListRequestValue(page: currentPage)) { [weak self] result in
             self?.viewState = .idle
-            guard let weakSelf = self else { return }
 
             switch result {
             case .success(let newPhotos):
-                var snapshot = weakSelf.dataSource.snapshot()
-                if snapshot.sectionIdentifiers.isEmpty {
-                    snapshot.appendSections([.main])
-                }
-                snapshot.appendItems(newPhotos)
-                DispatchQueue.main.async {
-                    weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
-                }
-
+                self?.photoDatas.value = newPhotos
             case .failure(let error):
                 print(error)
             }
@@ -109,28 +94,14 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
     }
 
     private func loadImages(for photo: Photo) {
-
         imageCache.loadImage(for: photo) { [weak self] item, image in
-            guard let weakSelf = self else { return }
-            guard let photo = item as? Photo else { return }
-            guard let image = image, image != photo.image else { return }
-
+            guard let photo = item as? Photo, let image = image, image != photo.image else { return }
             photo.image = image
-            var snapshot = weakSelf.dataSource.snapshot()
-            guard snapshot.indexOfItem(photo) != nil else { return }
-
-            snapshot.reloadItems([photo])
-            DispatchQueue.main.async {
-                weakSelf.dataSource.apply(snapshot, animatingDifferences: false)
-            }
+            self?.photoImage.value = photo
         }
     }
 
-    private func prefetchImage(at indexPath: IndexPath) {
-        guard let photo = dataSource.itemIdentifier(for: indexPath) else {
-            return
-        }
-
+    private func prefetchImage(photo: Photo) {
         imageCache.prefetchImage(for: photo)
     }
 }
@@ -139,9 +110,6 @@ final class PhotoListViewModelImpl: PhotoListViewModel {
 
 extension PhotoListViewModelImpl {
     func didUpdateScroll(to page: IndexPath) {
-        let snapshot = dataSource.snapshot()
-        if page.row < snapshot.numberOfItems, page.section < snapshot.numberOfSections, dataSource.snapshot().numberOfItems != 0 {
-            scrollPageFromDetailPhoto.value = page
-        }
+        didUpdateScroll.value = page
     }
 }
