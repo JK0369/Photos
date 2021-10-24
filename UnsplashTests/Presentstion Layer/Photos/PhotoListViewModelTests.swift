@@ -40,10 +40,8 @@ class PhotoListViewModelTests: XCTestCase {
         let viewModel = PhotoListViewModelImpl(photoListUseCase: photoListUseCaseMock,
                                                imageCache: imageCacheMock,
                                                actions: photoListViewModelActionsMock)
-        let tableViewMock = UITableView()
-
         // when (input)
-        viewModel.viewDidLoad(with: tableViewMock)
+        viewModel.viewDidLoad()
         viewModel.scrollViewDidScroll()
 
         // then (output)
