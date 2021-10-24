@@ -38,10 +38,8 @@ class PhotoSearchViewModelTests: XCTestCase {
         let imageCacheMock = ImageCacheMock()
         let photoSearchViewModelActionsMock = PhotoSearchViewModelActions(showPhotoDetail: PhotoSearchViewModelTests.showPhotoDetailMock)
         let viewModel = PhotoSearchViewModelImpl(photoSearchUseCase: photoSearchUseCaseMock, imageCache: imageCacheMock, actions: photoSearchViewModelActionsMock)
-        let collectionViewMock = UICollectionView(frame: .zero, collectionViewLayout: .leftThreeRightThree)
 
         // when (input)
-        viewModel.viewDidLoad(with: collectionViewMock)
         viewModel.didTapReuturnKey(with: "query-test")
         viewModel.scrollViewDidScroll()
 
