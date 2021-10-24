@@ -17,6 +17,7 @@ class PhotoSearchViewController: UIViewController {
     }
 
     private var viewModel: PhotoSearchViewModel!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Photo>!
 
     private lazy var searchEmptyView: SearchEmptyView = {
         return SearchEmptyView()
@@ -38,11 +39,11 @@ class PhotoSearchViewController: UIViewController {
         super.viewDidLoad()
 
         setupViews()
+        setupCollectionViewDiffableDataSource()
         addSubviews()
         makeConstraints()
         setupSearchController()
         bindOutput()
-        viewModel.viewDidLoad(with: collectionView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +59,17 @@ class PhotoSearchViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.navigationItem.searchController?.searchBar.searchTextField.textColor = .white
         }
+    }
+
+    private func setupCollectionViewDiffableDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Photo>(collectionView: collectionView,
+                                                                                  cellProvider: { [weak self] collectionView, indexPath, photo in
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath)
+            (cell as? PhotoCollectionViewCell)?.model = photo
+            self?.viewModel.didUpdateCell(with: photo)
+            return cell
+        })
     }
 
     private func addSubviews() {
@@ -95,8 +107,31 @@ class PhotoSearchViewController: UIViewController {
     }
 
     private func bindOutput() {
+        viewModel.photoDatas.observe(on: self, observerBlock: { [weak self] in self?.setupPhotoDatas($0) })
+        viewModel.photoImage.observe(on: self, observerBlock: { [weak self] in self?.setupPhoto($0) })
         viewModel.emptySearchResult.observe(on: self) { [weak self] in self?.updateSearchEmptyView() }
         viewModel.scrollPageFromDetailPhoto.observe(on: self) { [weak self] in self?.updateScroll(to: $0) }
+        viewModel.clearPhotos.observe(on: self) { [weak self] in self?.clearPhotos() }
+        viewModel.didUpdateScroll.observe(on: self, observerBlock: { [weak self] in self?.scrollPageFromDetailPhoto($0)})
+    }
+
+    private func setupPhotoDatas(_ photos: [Photo]) {
+        var snapshot = dataSource.snapshot()
+        if snapshot.sectionIdentifiers.isEmpty { snapshot.appendSections([.main]) }
+        snapshot.appendItems(photos)
+        DispatchQueue.main.async { [weak self] in
+            self?.dataSource.apply(snapshot, animatingDifferences: false)
+        }
+    }
+
+    private func setupPhoto(_ photo: Photo?) {
+        guard let photo = photo else { return }
+        var snapshot = dataSource.snapshot()
+        guard snapshot.indexOfItem(photo) != nil else { return }
+        snapshot.reloadItems([photo])
+        DispatchQueue.main.async { [weak self] in
+            self?.dataSource.apply(snapshot, animatingDifferences: false)
+        }
     }
 
     private func updateSearchEmptyView() {
@@ -107,6 +142,18 @@ class PhotoSearchViewController: UIViewController {
     private func updateScroll(to page: IndexPath) {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.scrollToItem(at: page, at: .bottom, animated: false)
+        }
+    }
+
+    private func clearPhotos() {
+        let snapshot =  NSDiffableDataSourceSnapshot<Section, Photo>.init()
+        dataSource.apply(snapshot)
+    }
+
+    private func scrollPageFromDetailPhoto(_ page: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        if page.row < snapshot.numberOfItems, page.section < snapshot.numberOfSections, dataSource.snapshot().numberOfItems != 0 {
+            updateScroll(to: page)
         }
     }
 }
@@ -126,7 +173,9 @@ extension PhotoSearchViewController: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.didSelectItem(at: indexPath)
+        let photos = dataSource.snapshot().itemIdentifiers
+        let finishFetchPhotos = photos.filter { $0.image != .placeholderImage }
+        viewModel.didSelect(photos: finishFetchPhotos, indexPath: indexPath)
     }
 }
 
@@ -134,7 +183,10 @@ extension PhotoSearchViewController: UICollectionViewDelegate {
 
 extension PhotoSearchViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach { viewModel.prefetchItem(at: $0) }
+        for indexPath in indexPaths {
+            guard let photo = dataSource.itemIdentifier(for: indexPath) else { continue }
+            viewModel.didDetectPrefetch(photo: photo)
+        }
     }
 }
 
