@@ -13,8 +13,8 @@ enum SearchMessageType {
 
     var message: String {
         switch self {
-        case .requiredQuery: return "검색창에서 키워드로\n사진을 검색해주세요."
-        case .emptyResult: return "해당 키워드에 대한 정보가 없습니다.\n다른 키워드로 다시 검색해주세요"
+        case .requiredQuery: return "Search for keyword photos in the search bar."
+        case .emptyResult: return "There is no information about that keyword. Please search again with a different keyword"
         }
     }
 }
